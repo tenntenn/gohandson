@@ -15,10 +15,12 @@ import (
 
 var (
 	resize string
+	clip   string
 )
 
 func init() {
 	flag.StringVar(&resize, "resize", "", "出力する画像サイズ（`幅[px|%]x高さ[px|%]`）")
+	flag.StringVar(&clip, "clip", "", "切り取る画像サイズ（`幅[px|%]x高さ[px|%]`）")
 	flag.Parse()
 }
 
@@ -47,7 +49,17 @@ func run() int {
 	img := &imgconv.Image{_img}
 
 	if resize != "" {
-		img.Resize(resize)
+		if err := img.Resize(resize); err != nil {
+			fmt.Fprintf(os.Stderr, "%s\n", err.Error())
+			return 1
+		}
+	}
+
+	if clip != "" {
+		if err := img.Clip(clip); err != nil {
+			fmt.Fprintf(os.Stderr, "%s\n", err.Error())
+			return 1
+		}
 	}
 
 	switch strings.ToLower(path.Ext(args[1])) {
