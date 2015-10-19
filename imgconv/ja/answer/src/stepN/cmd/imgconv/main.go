@@ -121,7 +121,7 @@ func run() error {
 				if ext != "."+format {
 					return nil
 				}
-			} else if ext != ".png" && ext != "jpg" && ext != "jpeg" {
+			} else if ext != ".png" && ext != ".jpg" && ext != ".jpeg" {
 				return nil
 			}
 
