@@ -13,7 +13,7 @@ import (
 	"strings"
 	"text/template"
 
-	"../../imgconv"
+	"stepN/imgconv"
 )
 
 var (
