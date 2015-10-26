@@ -17,14 +17,14 @@ import (
 )
 
 var (
-	resize string
 	clip   string
+	resize string
 	format string
 )
 
 func init() {
-	flag.StringVar(&resize, "resize", "", "出力する画像サイズ（`幅[px|%]x高さ[px|%]`）")
 	flag.StringVar(&clip, "clip", "", "切り取る画像サイズ（`幅[px|%]x高さ[px|%]`）")
+	flag.StringVar(&resize, "resize", "", "出力する画像サイズ（`幅[px|%]x高さ[px|%]`）")
 	flag.StringVar(&format, "format", "", "ディレクトリ指定の場合に、変換する画像ファイルのフォーマット（`png|jpeg|jpg`）")
 	flag.Parse()
 }
@@ -49,14 +49,14 @@ func convert(dst, src string) error {
 	}
 	img := &imgconv.Image{_img}
 
-	if resize != "" {
-		if err := img.Resize(resize); err != nil {
+	if clip != "" {
+		if err := img.Clip(clip); err != nil {
 			return fmt.Errorf("%s\n", err.Error())
 		}
 	}
 
-	if clip != "" {
-		if err := img.Clip(clip); err != nil {
+	if resize != "" {
+		if err := img.Resize(resize); err != nil {
 			return fmt.Errorf("%s\n", err.Error())
 		}
 	}

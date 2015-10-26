@@ -35,6 +35,6 @@ TODO
 * STEP 3: [ファイルを扱おう](./skeleton/src/step3)（[解答例](./solution/src/step3)）
 * STEP 4: [画像形式を変換しよう](./skeleton/src/step4)（[解答例](./solution/src/step4)）
 * STEP 5: [`flag`パッケージを使おう](./skeleton/src/step5)（[解答例](./solution/src/step5)）
-* STEP 6: [画像を切り取ろう](./skeleton/src/step6)（[解答例](./solution/src/step6)）
+* STEP 6: [画像を切り抜こう](./skeleton/src/step6)（[解答例](./solution/src/step6)）
 * STEP 7: [画像を縮小／拡大しよう](./skeleton/src/step7)（[解答例](./solution/src/step7)）
 * STEP 8: [複数のファイルを処理しよう](./skeleton/src/step8)（[解答例](./solution/src/step8)）
