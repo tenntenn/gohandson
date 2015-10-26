@@ -12,11 +12,16 @@ import (
 )
 
 var (
-	SizeError   = fmt.Errorf("指定したサイズの形式が不正です。")
-	BoundsError = fmt.Errorf("指定した領域の形式が不正です。")
-	UnkownUnit  = fmt.Errorf("不正な単位です")
+	// ErrInvalidSize は、指定したサイズが不正だった場合のエラーです。
+	ErrInvalidSize = fmt.Errorf("指定したサイズの形式が不正です。")
+	// ErrInvalidBounds は、指定した領域の形式が不正だった場合のエラーです。
+	ErrInvalidBounds = fmt.Errorf("指定した領域の形式が不正です。")
+	// ErrUnkownUnit は、想定外の不正な単位だった場合のエラーです。
+	ErrUnkownUnit = fmt.Errorf("不正な単位です。")
 )
 
+// Image は、image.Image をラップした構造体です。
+// ラップした画像に対して、リサイズ等の操作を提供します。
 type Image struct {
 	image.Image
 }
@@ -32,7 +37,7 @@ func parseRelSize(base int, s string) (int, error) {
 
 	v, err := strconv.Atoi(s[:i])
 	if err != nil {
-		return 0, SizeError
+		return 0, ErrInvalidSize
 	}
 
 	switch s[i:] {
@@ -41,20 +46,20 @@ func parseRelSize(base int, s string) (int, error) {
 	case "px":
 		return v, nil
 	default:
-		return 0, UnkownUnit
+		return 0, ErrUnkownUnit
 	}
 }
 
 func (img *Image) parseSize(s string) (r image.Rectangle, err error) {
 	sp := strings.Split(s, "x")
 	if len(sp) <= 0 || len(sp) > 2 {
-		err = SizeError
+		err = ErrInvalidSize
 		return
 	}
 
 	r.Max.X, err = parseRelSize(img.Bounds().Max.X, sp[0])
 	if err != nil {
-		err = SizeError
+		err = ErrInvalidSize
 		return
 	}
 
@@ -70,7 +75,7 @@ func (img *Image) parseSize(s string) (r image.Rectangle, err error) {
 func (img *Image) parseBounds(s string) (r image.Rectangle, err error) {
 	sp := strings.Split(s, "+")
 	if len(sp) <= 0 || len(sp) > 3 {
-		err = BoundsError
+		err = ErrInvalidBounds
 		return
 	}
 
@@ -114,6 +119,12 @@ func newDrawImage(r image.Rectangle, m color.Model) draw.Image {
 	}
 }
 
+// Resize は、画像のリサイズを行う。
+// "10x20"のように、幅x高さを指定する。
+// "10%X10%"のように、単位も指定できる。
+// 使用できる単位は、"px"と"%"である。
+// "%"を指定すると、元の画像の幅や高さを基準とする。
+// 高さを省略すると、幅と同じになる。
 func (img *Image) Resize(s string) error {
 	r, err := img.parseSize(s)
 	if err != nil {
@@ -127,6 +138,13 @@ func (img *Image) Resize(s string) error {
 	return nil
 }
 
+// Clip は、画像の一部部分を矩形で切り抜く。
+// 切り抜く領域は、幅x高さ+X座標+Y座標で指定し、
+// (X座標, Y座標) - (X座標+幅, Y座標+高さ)の領域が切り抜かれる。
+// 幅と高さは、Resizeで指定できるものと同じである。
+// XY座標にも"px"や"%"の単位が使える。
+// "%"を指定すると、元の画像の幅や高さを基準とする。
+// XY座標は省略でき、省略すると0となる。
 func (img *Image) Clip(s string) error {
 	r, err := img.parseBounds(s)
 	if err != nil {
