@@ -40,7 +40,6 @@ func run() error {
 
 func main() {
 	if err := run(); err != nil {
-		// TODO: 標準エラー出力（os.Stderr）にエラーを出力する
 		fmt.Fprintf(os.Stderr, "%s\n", err.Error())
 		os.Exit(1)
 	}
