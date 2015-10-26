@@ -12,14 +12,14 @@ import (
 )
 
 var (
-	resize string
+	clip string
 )
 
 func init() {
-	// TODO: resizeというフラグを追加し、変数resizeに入れる。
+	// TODO: clipというフラグを追加し、変数clipに入れる。
 	// デフォルト値は、""。
-	// 説明は、"出力する画像サイズ（`幅[px|%]x高さ[px|%]`）"。
-	flag.StringVar(&resize, "resize", "", "出力する画像サイズ（`幅[px|%]x高さ[px|%]`）")
+	// 説明は、"切り取る画像サイズ（`幅[px|%]x高さ[px|%]`）"。
+	flag.StringVar(&clip, "clip", "", "切り取る画像サイズ（`幅[px|%]x高さ[px|%]`）")
 	// TODO: フラグをパースする。
 	flag.Parse()
 }
@@ -43,10 +43,10 @@ func convert(dst, src string) error {
 		return err
 	}
 
-	// TODO: resizeで何か指定されていれば、
-	// 標準出力に"リサイズをする予定"という文字列とともにresizeの中身を出力する
-	if resize != "" {
-		fmt.Println("リサイズする予定", resize)
+	// TODO: clipで何か指定されていれば、
+	// 標準出力に"切り抜きを行う予定"という文字列とともにclipの中身を出力する
+	if clip != "" {
+		fmt.Println("切り抜きを行う予定", clip)
 	}
 
 	switch strings.ToLower(path.Ext(dst)) {

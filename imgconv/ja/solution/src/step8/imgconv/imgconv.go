@@ -21,7 +21,7 @@ var (
 )
 
 // Image は、image.Image をラップした構造体です。
-// ラップした画像に対して、リサイズ等の操作を提供します。
+// ラップした画像に対して、切り抜き等の操作を提供します。
 type Image struct {
 	image.Image
 }
