@@ -28,9 +28,6 @@ func run() error {
 
 	scanner := bufio.NewScanner(sf)
 	// TODO: sfから1行ずつ読み込み、"行数:"を前に付けてdfに書き出す。
-	for i := 1; scanner.Scan(); i++ {
-		fmt.Fprintf(df, "%d:%s\n", i, scanner.Text())
-	}
 
 	// TODO: scannerから得られたエラーを返す
 }
