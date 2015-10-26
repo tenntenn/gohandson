@@ -28,6 +28,8 @@ Windowsの場合：
 TODO
 ```
 
+なお、ハンズオン中に、`tree`コマンドを実行している部分がありますが、わかりやすさのためなので、特に実行する必要はありません。
+
 ## 目次
 
 * STEP 1: [go installしてみよう](./skeleton/src/step1)（[解答例](./solution/src/step1)）

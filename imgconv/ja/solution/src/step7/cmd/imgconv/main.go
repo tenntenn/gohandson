@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
 	"image"
@@ -9,23 +8,19 @@ import (
 	"image/png"
 	"os"
 	"path"
-	"path/filepath"
 	"strings"
-	"text/template"
 
-	"step8/imgconv"
+	"step7/imgconv"
 )
 
 var (
 	clip   string
 	resize string
-	format string
 )
 
 func init() {
 	flag.StringVar(&clip, "clip", "", "切り取る画像サイズ（`幅[px|%]x高さ[px|%]`）")
 	flag.StringVar(&resize, "resize", "", "出力する画像サイズ（`幅[px|%]x高さ[px|%]`）")
-	flag.StringVar(&format, "format", "", "ディレクトリ指定の場合に、変換する画像ファイルのフォーマット（`png|jpeg|jpg`）")
 	flag.Parse()
 }
 
@@ -48,7 +43,7 @@ func convert(dst, src string) error {
 		return err
 	}
 
-	img := &imgconv.Image{_img}
+	img := imgconv.Image{_img}
 
 	if clip != "" {
 		if err := img.Clip(clip); err != nil {
@@ -56,6 +51,7 @@ func convert(dst, src string) error {
 		}
 	}
 
+	// TODO: resizeが指定されていれば、リサイズを行う。
 	if resize != "" {
 		if err := img.Resize(resize); err != nil {
 			return fmt.Errorf("%s\n", err.Error())
@@ -76,64 +72,12 @@ func convert(dst, src string) error {
 	return nil
 }
 
-type file string
-
-func (f file) Ext() string {
-	return path.Ext(string(f))
-}
-
-func (f file) Dir() string {
-	return path.Dir(string(f))
-}
-
-func (f file) Name() string {
-	return strings.Replace(path.Base(string(f)), f.Ext(), "", -1)
-}
-
 func run() error {
 	args := flag.Args()
 	if len(args) < 2 {
 		return fmt.Errorf("画像ファイルを指定してください。")
 	}
 
-	info, err := os.Stat(args[0])
-	if os.IsNotExist(err) {
-		return fmt.Errorf("画像ファイルが存在しません。%s", args[0])
-	}
-
-	// ディレクトリの場合
-	if info.IsDir() {
-		t, err := template.New("dst").Parse(args[1])
-		if err != nil {
-			return err
-		}
-
-		return filepath.Walk(args[0], func(p string, info os.FileInfo, err error) error {
-			if err != nil {
-				return err
-			}
-
-			if info.IsDir() {
-				return nil
-			}
-
-			ext := strings.ToLower(path.Ext(p))
-			if format != "" {
-				if ext != "."+format {
-					return nil
-				}
-			} else if ext != ".png" && ext != ".jpg" && ext != ".jpeg" {
-				return nil
-			}
-
-			var buf bytes.Buffer
-			t.Execute(&buf, file(p))
-
-			return convert(buf.String(), p)
-		})
-	}
-
-	// ファイルの場合
 	return convert(args[1], args[0])
 }
 

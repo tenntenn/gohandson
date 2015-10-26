@@ -139,17 +139,17 @@ func newDrawImage(r image.Rectangle, m color.Model) draw.Image {
 // Clip は、画像の一部部分を矩形で切り抜く。
 // 切り抜く領域は、幅x高さ+X座標+Y座標で指定し、
 // (X座標, Y座標) - (X座標+幅, Y座標+高さ)の領域が切り抜かれる。
-// 幅と高さは、Resizeで指定できるものと同じである。
-// XY座標にも"px"や"%"の単位が使える。
+// 幅と高さ、XY座標には"px"や"%"の単位が使える。
 // "%"を指定すると、元の画像の幅や高さを基準とする。
-// XY座標は省略でき、省略すると0となる。
+// 高さは省略すると、幅と同じになる。
+// また、XY座標も省略でき、省略するとそれぞれ0となる。
 func (img *Image) Clip(s string) error {
 	r, err := img.parseBounds(s)
 	if err != nil {
 		return err
 	}
 
-	dst := newDrawImage(r, img.ColorModel())
+	dst := newDrawImage(image.Rectangle{image.ZP, r.Size()}, img.ColorModel())
 	draw.Draw(dst, dst.Bounds(), img, r.Min, draw.Src)
 
 	img.Image = dst
@@ -170,6 +170,8 @@ func (img *Image) Resize(s string) error {
 	}
 
 	dst := newDrawImage(image.Rectangle{image.ZP, sz}, img.ColorModel())
+	// TODO: draw.NearestNeighbor.Scaleを使って画像を縮小する。
+	// なお、第6引数の*draw.Optionsはnilで構わない。
 	draw.NearestNeighbor.Scale(dst, dst.Bounds(), img, img.Bounds(), draw.Src, nil)
 
 	img.Image = dst
