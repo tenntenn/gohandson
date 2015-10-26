@@ -39,6 +39,9 @@ t, _ := template.New("MyTemplate").Parse(`{{.}} {{.ToLower}}`)
 t.Execute(r, MyString("Hello, Gophers"))
 ```
 
+なお上記の例では、`string`型に新しく`MyString`という型名をつけ、その型にメソッドを設けています。
+このように、Goでは構造体以外の型にも、パッケージ内で`type`で宣言していればメソッドを設けることができます。
+
 ## 実行例
 
 ```
