@@ -19,3 +19,15 @@
 その場合には、`strings.NewReader`で`string`型をそのまま`io.Reader`に変換できることができます。
 
 なお、`bytes`パッケージも`[]byte`向けに、`strings`と似たような機能を提供しています。
+
+## 実行例
+
+```
+$ pwd
+/path/to/gohandson/imgconv/ja/solution
+$ GOPATH=`pwd`
+$ go install step4/cmd/imgconv
+$ go install tools/cmd/httpget
+$ ./bin/httpget https://raw.githubusercontent.com/tenntenn/gopher-stickers/master/png/01.png > gopher.png
+$ ./bin/imgconv gopher.png gopher.jpg
+```

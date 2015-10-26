@@ -15,3 +15,20 @@
 `defer`を使って、`defer f.Close()`のように関数の終わりに閉じる場合が多いでしょう。
 なお、`defer`は関数の遅延実行を行う機能で、`defer`の後ろに書いた関数呼び出しは、実行中の関数が`return`される直前に呼ばれます。
 1つの関数内で複数`defer`を書いた場合は、最後に記述したものから実行されます。
+
+## 実行例
+
+```
+$ pwd
+/path/to/gohandson/imgconv/ja/solution
+$ GOPATH=`pwd`
+$ go install step3/cmd/imgconv
+$ echo "foo\nbar" > input.txt
+$ cat input.txt
+foo
+bar
+$ ./bin/imgconv input.txt output.txt
+$ cat output.txt
+1:foo
+2:bar
+```

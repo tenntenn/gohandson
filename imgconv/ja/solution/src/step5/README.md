@@ -8,3 +8,20 @@
 
 `flag.Args`関数を使うと、フラグとしてパースされた部分以外のコマンドライン引数を取ることができます。
 `os.Args`スライスと似たような値を返しますが、`flag.Args`関数が返すスライスは、`0`番目の要素にコマンド名は含まれません。
+
+## 実行例
+
+```
+$ pwd
+/path/to/gohandson/imgconv/ja/solution
+$ GOPATH=`pwd`
+$ go install step5/cmd/imgconv
+$ ./bin/imgconv -h
+Usage of ./bin/imgconv:
+  -clip 幅[px|%]x高さ[px|%]
+        切り取る画像サイズ（幅[px|%]x高さ[px|%]）
+$ go install tools/cmd/httpget
+$ ./bin/httpget https://raw.githubusercontent.com/tenntenn/gopher-stickers/master/png/01.png > gopher.png
+$ ./bin/imgconv -clip 10x10 gopher.png gopher.jpg
+切り抜きを行う予定 10x10
+```

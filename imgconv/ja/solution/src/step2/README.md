@@ -14,3 +14,16 @@ $ imgconv input.png output.png
 `fmt.Fprintf`は、第1引数に`io.Writer`インタフェースを取ることができ、このインタフェースを実装した（`Writer`メソッドを持つ）型であれば、どのような型に対しても書式を指定して出力できます。
 
 `fmt.Errorf`は、指定した書式でエラーメッセージを記述し、そのエラーメッセージを`Error`メソッドで返す`error`インタフェース型の値を返します。
+
+## 実行例
+
+```
+$ pwd
+/path/to/gohandson/imgconv/ja/solution
+$ GOPATH=`pwd`
+$ go install step2/cmd/imgconv
+$ ./bin/imgconv input.txt output.txt
+./bin/imgconv
+input.txt
+output.txt
+```

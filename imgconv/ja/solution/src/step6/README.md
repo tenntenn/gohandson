@@ -42,3 +42,15 @@ type Image struct {
 img := &Image{_img} // _imgはimage.Image型
 img.Image = _img2   // _img2もimage.Image型
 ```
+
+## 実行例
+
+```
+$ pwd
+/path/to/gohandson/imgconv/ja/solution
+$ GOPATH=`pwd`
+$ go install step5/cmd/imgconv
+$ go install tools/cmd/httpget
+$ ./bin/httpget https://raw.githubusercontent.com/tenntenn/gopher-stickers/master/png/01.png > gopher.png
+$ ./bin/imgconv -clip 100x100+50%+50% gopher.png gopher2.png
+```
