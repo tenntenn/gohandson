@@ -61,7 +61,7 @@ $ GOPATH=`pwd`/skeleton
 Windowsの場合：
 
 ```
-TODO
+SET GOPATH=%CD%\skeleton
 ```
 
 なお、ハンズオン中に、`tree`コマンドを実行している部分がありますが、
