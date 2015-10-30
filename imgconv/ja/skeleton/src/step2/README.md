@@ -24,7 +24,7 @@ $ imgconv input.png output.png
 
 ```
 $ pwd
-/path/to/gohandson/imgconv/ja/solution
+/path/to/gohandson/imgconv/ja/skeleton
 $ GOPATH=`pwd`
 $ go install step2/cmd/imgconv
 $ ./bin/imgconv input.txt output.txt

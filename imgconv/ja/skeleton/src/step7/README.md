@@ -38,7 +38,7 @@ CONTRIBUTORS    README          codereview.cfg  example         riff            
 
 ```
 $ pwd
-/path/to/gohandson/imgconv/ja/solution
+/path/to/gohandson/imgconv/ja/skeleton
 $ GOPATH=`pwd`
 $ go install step7/cmd/imgconv
 $ go install tools/cmd/httpget

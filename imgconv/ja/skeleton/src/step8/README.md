@@ -62,7 +62,7 @@ t.Execute(r, MyString("Hello, Gophers"))
 
 ```
 $ pwd
-/path/to/gohandson/imgconv/ja/solution
+/path/to/gohandson/imgconv/ja/skeleton
 $ GOPATH=`pwd`
 $ go get golang.org/x/image/draw
 $ go install step8/cmd/imgconv

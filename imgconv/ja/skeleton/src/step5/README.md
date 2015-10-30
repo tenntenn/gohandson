@@ -15,7 +15,7 @@ STEP 5では、`flag`パッケージを使いコマンドライン引数から�
 
 ```
 $ pwd
-/path/to/gohandson/imgconv/ja/solution
+/path/to/gohandson/imgconv/ja/skeleton
 $ GOPATH=`pwd`
 $ go install step5/cmd/imgconv
 $ ./bin/imgconv -h

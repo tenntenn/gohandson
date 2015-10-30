@@ -32,7 +32,7 @@ STEP 4では、いよいよ画像を扱います。
 
 ```
 $ pwd
-/path/to/gohandson/imgconv/ja/solution
+/path/to/gohandson/imgconv/ja/skeleton
 $ GOPATH=`pwd`
 $ go install step4/cmd/imgconv
 $ go install tools/cmd/httpget

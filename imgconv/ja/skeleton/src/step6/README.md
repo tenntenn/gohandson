@@ -82,7 +82,7 @@ img.Image = _img2
 
 ```
 $ pwd
-/path/to/gohandson/imgconv/ja/solution
+/path/to/gohandson/imgconv/ja/skeleton
 $ GOPATH=`pwd`
 $ go install step6/cmd/imgconv
 $ go install tools/cmd/httpget

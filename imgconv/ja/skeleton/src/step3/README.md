@@ -30,7 +30,7 @@ STEP 3では、コマンドライン引数で指定されたテキストファ�
 
 ```
 $ pwd
-/path/to/gohandson/imgconv/ja/solution
+/path/to/gohandson/imgconv/ja/skeleton
 $ GOPATH=`pwd`
 $ go install step3/cmd/imgconv
 $ echo "foo\nbar" > input.txt
