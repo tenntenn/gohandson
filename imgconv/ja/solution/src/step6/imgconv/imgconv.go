@@ -39,7 +39,7 @@ func parseRelSize(base int, s string) (int, error) {
 
 	// TODO: 数字のみだった場合は、単位なしの数値のみとし、
 	// sをint型に変換して返す。
-	// ヒント：stringsパッケージのドキュメントを見て、struct.IndexFuncの戻り値を調べよう。
+	// ヒント：stringsパッケージのドキュメントを見て、strings.IndexFuncの戻り値を調べよう。
 	if i < 0 {
 		return strconv.Atoi(s)
 	}
