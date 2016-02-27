@@ -3,6 +3,11 @@
 STEP 7では、さらにコマンドに機能を追加し、画像の縮小／拡大を行えるようにします。
 拡大するサイズは、`resize`という名前でフラグとしてコマンドライン引数で指定します。
 縮小／拡大を行うには、STEP 6で使用した`image/draw`パッケージの代わりに、`golang.org/x/image/draw`パッケージを使用します。
+`image/draw`と`golang.org/x/image/draw`の違いは、パッケージドキュメントを見比べてみると分かります。
+`golang.org/x/image/draw`の方が`image/draw`より機能が増えています。
+
+* `image/draw`：https://golang.org/pkg/image/draw/
+* `golang.org/x/image/draw`：https://godoc.org/golang.org/x/image/draw
 
 ここでは、`golang.org/x/image`パッケージの説明と外部パッケージの`go get`の方法について説明します。
 
@@ -38,7 +43,7 @@ CONTRIBUTORS    README          codereview.cfg  example         riff            
 
 ```
 $ pwd
-/path/to/gohandson/imgconv/ja/skeleton
+/path/to/gohandson/imgconv/ja/solution
 $ GOPATH=`pwd`
 $ go install step7/cmd/imgconv
 $ go install tools/cmd/httpget
