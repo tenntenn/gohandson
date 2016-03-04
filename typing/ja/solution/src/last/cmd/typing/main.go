@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"last/typing"
 )
 
 // step1: go install
@@ -32,9 +34,11 @@ func main() {
 		os.Exit(1)
 	}
 
-	game := typing.New(f)
-	if err := game.Run(); err != nil {
+	game, err := typing.New(f)
+	if err != nil {
 		fmt.Fprintf(os.Stderr, "%s\n", err.Error())
 		os.Exit(1)
 	}
+
+	game.Run()
 }
