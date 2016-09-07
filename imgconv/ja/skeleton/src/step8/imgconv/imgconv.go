@@ -16,8 +16,8 @@ var (
 	ErrInvalidSize = fmt.Errorf("指定したサイズの形式が不正です。")
 	// ErrInvalidBounds は、指定した領域の形式が不正だった場合のエラーです。
 	ErrInvalidBounds = fmt.Errorf("指定した領域の形式が不正です。")
-	// ErrUnkownUnit は、想定外の不正な単位だった場合のエラーです。
-	ErrUnkownUnit = fmt.Errorf("不正な単位です。")
+	// ErrUnknownUnit は、想定外の不正な単位だった場合のエラーです。
+	ErrUnknownUnit = fmt.Errorf("不正な単位です。")
 )
 
 // Image は、image.Image をラップした構造体です。
@@ -50,7 +50,7 @@ func parseRelSize(base int, s string) (int, error) {
 	case "px":
 		return v, nil
 	default:
-		return 0, ErrUnkownUnit
+		return 0, ErrUnknownUnit
 	}
 }
 
