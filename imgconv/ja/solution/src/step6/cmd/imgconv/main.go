@@ -7,7 +7,7 @@ import (
 	"image/jpeg"
 	"image/png"
 	"os"
-	"path"
+	"path/filepath"
 	"strings"
 
 	"step6/imgconv"
@@ -50,7 +50,7 @@ func convert(dst, src string) error {
 		}
 	}
 
-	switch strings.ToLower(path.Ext(dst)) {
+	switch strings.ToLower(filepath.Ext(dst)) {
 	case ".png":
 		err = png.Encode(df, img)
 	case ".jpeg", ".jpg":
