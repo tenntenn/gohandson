@@ -5,7 +5,7 @@ import (
 	"image"
 	// TODO: pngとjpegをデコードできるようにimportする。
 	"os"
-	"path"
+	"path/filepath"
 	"strings"
 )
 

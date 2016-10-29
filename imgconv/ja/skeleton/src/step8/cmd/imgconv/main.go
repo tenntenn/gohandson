@@ -8,7 +8,6 @@ import (
 	"image/jpeg"
 	"image/png"
 	"os"
-	"path"
 	"path/filepath"
 	"strings"
 	"text/template"
@@ -62,7 +61,7 @@ func convert(dst, src string) error {
 		}
 	}
 
-	switch strings.ToLower(path.Ext(dst)) {
+	switch strings.ToLower(filepath.Ext(dst)) {
 	case ".png":
 		err = png.Encode(df, img)
 	case ".jpeg", ".jpg":
@@ -83,7 +82,7 @@ type file string
 // TODO: ディレクトリを返すメソッドを作る。
 
 func (f file) Name() string {
-	return strings.Replace(path.Base(string(f)), f.Ext(), "", -1)
+	return strings.Replace(filepath.Base(string(f)), f.Ext(), "", -1)
 }
 
 func run() error {
@@ -111,7 +110,7 @@ func run() error {
 
 			// TODO: ディレクトリだったら何もしない。
 
-			ext := strings.ToLower(path.Ext(p))
+			ext := strings.ToLower(filepath.Ext(p))
 			// TODO: 拡張子がformatで指定されたものでなければ何もしない。
 			// formatで何もしてなければ、拡張子が".png"、".jpg"、".jpeg"以外は何もしない。
 

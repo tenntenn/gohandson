@@ -15,9 +15,9 @@ STEP 4では、いよいよ画像を扱います。
 `image/png`パッケージや`image/jpeg`パッケージでは、`png`や`jpeg`形式の画像を`io.Reader`から`image.Image`にデコードしたり、`image.Image`から`io.Writer`へエンコードする機能が提供されています。
 
 
-## pathパッケージ
-`path`パッケージは、パスに関する機能を提供しています。
-例えば、`path.Ext`はファイル名から拡張子を取得でき、`path.Join`はOSごとの適切な区切り文字でパスを結合することができます。
+## path/filepathパッケージ
+`path/filepath`パッケージは、パスに関する機能を提供しています。
+例えば、`filepath.Ext`はファイル名から拡張子を取得でき、`filepath.Join`はOSごとの適切な区切り文字でパスを結合することができます。
 
 ## stringsパッケージ
 `strings`パッケージは、文字列操作に関する処理を提供するパッケージです。
