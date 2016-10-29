@@ -7,7 +7,7 @@ import (
 	"image/jpeg"
 	"image/png"
 	"os"
-	"path"
+	"path/filepath"
 	"strings"
 )
 
@@ -36,7 +36,7 @@ func convert(dst, src string) error {
 	// 拡張子は大文字でも小文字でも動作するようにする。
 	// なお、jpegは`jpeg.DefaultQuality`で保存する。
 	// エラー処理も忘れないようにする。
-	switch strings.ToLower(path.Ext(dst)) {
+	switch strings.ToLower(filepath.Ext(dst)) {
 	case ".png":
 		err = png.Encode(df, img)
 	case ".jpeg", ".jpg":
