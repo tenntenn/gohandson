@@ -7,7 +7,7 @@ import (
 	"image/jpeg"
 	"image/png"
 	"os"
-	"path"
+	"path/filepath"
 	"strings"
 )
 
@@ -45,7 +45,7 @@ func convert(dst, src string) error {
 	// TODO: clipで何か指定されていれば、
 	// 標準出力に"切り抜きを行う予定"という文字列とともにclipの中身を出力する
 
-	switch strings.ToLower(path.Ext(dst)) {
+	switch strings.ToLower(filepath.Ext(dst)) {
 	case ".png":
 		err = png.Encode(df, img)
 	case ".jpeg", ".jpg":

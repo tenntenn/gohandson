@@ -7,7 +7,7 @@ import (
 	"image/jpeg"
 	"image/png"
 	"os"
-	"path"
+	"path/filepath"
 	"strings"
 )
 
@@ -49,7 +49,7 @@ func convert(dst, src string) error {
 		fmt.Println("切り抜きを行う予定", clip)
 	}
 
-	switch strings.ToLower(path.Ext(dst)) {
+	switch strings.ToLower(filepath.Ext(dst)) {
 	case ".png":
 		err = png.Encode(df, img)
 	case ".jpeg", ".jpg":
