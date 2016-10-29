@@ -91,7 +91,7 @@ $ pwd
 $ GOPATH=`pwd`
 $ go install step6/cmd/imgconv
 $ go install tools/cmd/httpget
-$ ./bin/httpget https://raw.githubusercontent.com/tenntenn/gopher-stickers/master/png/01.png > gopher.png
+$ ./bin/httpget https://raw.githubusercontent.com/tenntenn/gopher-stickers/master/png/hi.png > gopher.png
 $ ./bin/imgconv -clip 100x100+50%+50% gopher.png gopher2.png
 ```
 

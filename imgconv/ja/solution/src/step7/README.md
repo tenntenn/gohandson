@@ -42,7 +42,7 @@ $ pwd
 $ GOPATH=`pwd`
 $ go install step7/cmd/imgconv
 $ go install tools/cmd/httpget
-$ ./bin/httpget https://raw.githubusercontent.com/tenntenn/gopher-stickers/master/png/01.png > gopher.png
+$ ./bin/httpget https://raw.githubusercontent.com/tenntenn/gopher-stickers/master/png/hi.png > gopher.png
 $ ./bin/imgconv -resize 50%x50% gopher.png gopher2.png
 ```
 

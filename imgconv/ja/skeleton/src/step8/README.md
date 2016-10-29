@@ -70,7 +70,7 @@ $ go install tools/cmd/httpget
 $ mkdir a
 $ mkdir a/b
 $ mkdir a/c
-$ ./bin/httpget https://raw.githubusercontent.com/tenntenn/gopher-stickers/master/png/01.png > a/b/gopher.png
+$ ./bin/httpget https://raw.githubusercontent.com/tenntenn/gopher-stickers/master/png/hi.png > a/b/gopher.png
 $ cp a/b/gopher.png a/c/
 $ ./bin/imgconv -format png -resize 50%x50% a "{{.Dir}}/{{.Name}}_small{{.Ext}}"
 $ tree a

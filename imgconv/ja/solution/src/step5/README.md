@@ -23,7 +23,7 @@ Usage of ./bin/imgconv:
   -clip 幅[px|%]x高さ[px|%]
         切り取る画像サイズ（幅[px|%]x高さ[px|%]）
 $ go install tools/cmd/httpget
-$ ./bin/httpget https://raw.githubusercontent.com/tenntenn/gopher-stickers/master/png/01.png > gopher.png
+$ ./bin/httpget https://raw.githubusercontent.com/tenntenn/gopher-stickers/master/png/hi.png > gopher.png
 $ ./bin/imgconv -clip 10x10 gopher.png gopher.jpg
 切り抜きを行う予定 10x10
 ```
