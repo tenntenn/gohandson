@@ -55,7 +55,7 @@ STEP 1からSTEP 8まで進んでいき、最終的には画像変換を行う�
 MacやLinuxの場合：
 
 ```
-$ GOPATH=`pwd`/skeleton
+$ export GOPATH=`pwd`/skeleton
 ```
 
 Windowsの場合：
