@@ -5,8 +5,6 @@ import (
 	"net/http"
 )
 
-const limitMessages = 10
-
 var indexTmpl = template.Must(template.New("index").Parse(`<!DOCTYPE html>
 <html>
 	<head>
