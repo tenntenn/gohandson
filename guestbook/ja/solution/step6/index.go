@@ -31,19 +31,11 @@ var indexTmpl = template.Must(template.New("index").Parse(`<!DOCTYPE html>
 func index(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 
-	msgs := make([]*Message, 0, 10)
-	q := datastore.NewQuery("Message").Order("-createdAt").Limit(cap(msgs))
-	for it := q.Run(ctx); ; {
-		var msg Message
-		_, err := it.Next(&msg)
-		if err == datastore.Done {
-			break
-		}
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		msgs = append(msgs, &msg)
+	var msgs []*Message
+	q := datastore.NewQuery("Message").Order("-createdAt").Limit(10)
+	if _, err := q.GetAll(ctx, &msgs); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	if err := indexTmpl.Execute(w, msgs); err != nil {
