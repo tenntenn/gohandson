@@ -6,7 +6,8 @@ import (
 )
 
 func index(w http.ResponseWriter, r *http.Request) {
-	msg := r.FormValue("msg")
+	var msg string
+	msg = r.FormValue("msg")
 	if msg == "" {
 		msg = "NO MESSAGE"
 	}
