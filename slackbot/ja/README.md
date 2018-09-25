@@ -13,36 +13,36 @@
  * https://api.slack.com/apps
 
 「Create New Appボタン」を押す。
-<img src="./01_create_new_app.png" width="300px">
+<img src="./01_create_new_app.png" width="500px">
 
 Appの名前と対象のワークスペースを選ぶ。
 
-<img src="./02_create_new_app2.png" width="300px">
+<img src="./02_create_new_app2.png" width="500px">
 
 ## Botを追加する
 
 Building Infomation > Add features and functionalityでBotsを選択する。
 
-<img src="./03_basic_infomation.png" width="300px">
+<img src="./03_basic_infomation.png" width="500px">
 
 ## Bot Userの追加
 
 Bot Usersで「Add Bot User」を選択する。
 
-<img src="./04_add_bot_user.png" width="300px">
+<img src="./04_add_bot_user.png" width="500px">
 
 名前などを入れてBot Userを作成。
 
-<img src="./05_add_bot_user_button.png" width="300px">
+<img src="./05_add_bot_user_button.png" width="500px">
 
 ## Slack Appをワークスペースにインストール
 
 Basic InfomationのInstall your app to your workspaceで「Install App to Workspace」ボタンを押す。
 
-<img src="./06_install_application.png" width="300px">
+<img src="./06_install_application.png" width="500px">
 
 Slack Appの認証を行う。
-<img src="./07_auth_app.png" width="300px">
+<img src="./07_auth_app.png" width="500px">
 
 ## ソースコードをデプロイする
 
@@ -62,11 +62,11 @@ env_variables:
 
 `SLACK_VERIFY_TOKEN:`は以下の画面からコピーする。
 
-<img src="./08_verify_token.png" width="300px">
+<img src="./08_verify_token.png" width="500px">
 
 `SLACK_BOT_TOKEN`は以下の画面からコピーする。
 
-<img src="./09_oauth_token.png" width="300px">
+<img src="./09_oauth_token.png" width="500px">
 
 Cloud ShellでGAEのアプリケーションをデプロイする。
 
@@ -78,12 +78,12 @@ $ goapp deploy --application <APP_NAME> --version <VERSION> --module slackbot .
 
 イベントをオンにする。
 
-<img src="./10_event_subscription_on.png" width="300px">
+<img src="./10_event_subscription_on.png" width="500px">
 
 GAEのURLを貼り付ける。
 
-<img src="./11_event_subscription_url.png" width="300px">
+<img src="./11_event_subscription_url.png" width="500px">
 
 「Add Bot User Event」ボタンを押し、`app_mention`を選択して追加する。
 
-<img src="./12_add_event_type.png" width="300px">
+<img src="./12_add_event_type.png" width="500px">
