@@ -79,7 +79,7 @@ env_variables:
 Cloud ShellでGAEのアプリケーションをデプロイする。
 
 ```
-$ goapp deploy --application <APP_NAME> --version <VERSION> --module slackbot .
+$ goapp deploy --application <APP_ID> --version <VERSION> --module slackbot .
 ```
 
 ## イベントの設定をする
@@ -89,6 +89,7 @@ $ goapp deploy --application <APP_NAME> --version <VERSION> --module slackbot .
 <img src="./10_event_subscription_on.png" width="500px">
 
 GAEのURLを貼り付ける。
+例：https://VERSION-dot-slackbot-dot-APP_ID.appspot.com/events
 
 <img src="./11_event_subscription_url.png" width="500px">
 
