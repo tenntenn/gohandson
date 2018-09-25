@@ -31,19 +31,11 @@ var indexTmpl = template.Must(template.New("index").Parse(`<!DOCTYPE html>
 func index(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 
-	msgs := make([]*Message, 0, 10)
-	// TODO: Message Kindから作成時間が新しい順に10件取得する
-	for it := q.Run(ctx); ; {
-		var msg Message
-		// TODO: msgにDatastoreから読み込んだ値を設定する
-		if err == datastore.Done {
-			break
-		}
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		msgs = append(msgs, &msg)
+	var msgs []*Message
+	// TODO: Message Kindから作成時間が新しい順に10件取得するためのクエリを作成
+	if /* TODO: クエリに該当するEntityをすべて取得する */ ; err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	if err := indexTmpl.Execute(w, msgs); err != nil {

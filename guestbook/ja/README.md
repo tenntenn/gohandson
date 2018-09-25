@@ -1,6 +1,6 @@
 # ゲストブック
 
-* STEP0: 事前準備
+* STEP0: 環境構築
 * STEP1: Hello, World
 * STEP2: デプロイしてみよう
 * STEP3: リクエストを取得する
