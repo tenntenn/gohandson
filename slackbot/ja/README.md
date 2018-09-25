@@ -13,6 +13,7 @@
  * https://api.slack.com/apps
 
 「Create New Appボタン」を押す。
+
 <img src="./01_create_new_app.png" width="500px">
 
 Appの名前と対象のワークスペースを選ぶ。
