@@ -42,6 +42,7 @@ Basic InfomationのInstall your app to your workspaceで「Install App to Worksp
 <img src="./06_install_application.png" width="500px">
 
 Slack Appの認証を行う。
+
 <img src="./07_auth_app.png" width="500px">
 
 ## ソースコードをデプロイする
