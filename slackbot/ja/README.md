@@ -58,7 +58,6 @@ goapp getしてslackのライブラリをいれる。
 
 ```
 $ goapp get -u github.com/nlopes/slack/...
-$ goapp get -u google.golang.org/appengine/...
 ```
 
 app.yamlの以下の部分をSlack Appの管理画面からコピーして貼り付ける。
