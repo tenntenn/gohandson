@@ -7,5 +7,5 @@ handlers:
   secure: always
 
 env_variables:
-  SLACK_BOT_TOKEN: "Paste your token"
   SLACK_VERIFY_TOKEN: "Paste your token"
+  SLACK_BOT_TOKEN: "Paste your token"
