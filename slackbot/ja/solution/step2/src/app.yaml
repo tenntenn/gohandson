@@ -1,0 +1,12 @@
+runtime: go
+api_version: go1.9
+module: slackbot
+
+handlers:
+- url: /.*
+  script: _go_app
+  secure: always
+
+env_variables:
+  SLACK_VERIFY_TOKEN: "Paste your token"
+  SLACK_BOT_TOKEN: "Paste your token"
