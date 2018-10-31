@@ -54,10 +54,10 @@ golang.tokyoのハンズオンを参考に、Cloud Shellが使えるようにす
 
 Cloud Shellでソースコードを`git clone`してくる。
 
-goapp getしてslackのライブラリをいれる。
+go getしてslackのライブラリをいれる。
 
 ```
-$ goapp get -u github.com/nlopes/slack/...
+$ go get -u github.com/nlopes/slack/...
 ```
 
 app.yamlの以下の部分をSlack Appの管理画面からコピーして貼り付ける。
@@ -80,7 +80,7 @@ Cloud ShellでGAEのアプリケーションをデプロイする。
 
 ```
 $ cd step1/src
-$ go deploy --application <APP_ID> --version <VERSION> --module slackbot .
+$ goapp deploy --application <APP_ID> --version <VERSION> --module slackbot .
 ```
 
 ## イベントの設定をする
