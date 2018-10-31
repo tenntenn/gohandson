@@ -97,3 +97,5 @@ GAEのURLを貼り付ける。
 「Add Bot User Event」ボタンを押し、`app_mention`を選択して追加する。
 
 <img src="./img/12_add_event_type.png" width="500px">
+
+`Save Changes` を押す
