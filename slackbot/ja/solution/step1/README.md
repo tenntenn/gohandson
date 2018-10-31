@@ -80,7 +80,7 @@ Cloud ShellでGAEのアプリケーションをデプロイする。
 
 ```
 $ cd step1/src
-$ goapp deploy --application <APP_ID> --version <VERSION> --module slackbot .
+$ go deploy --application <APP_ID> --version <VERSION> --module slackbot .
 ```
 
 ## イベントの設定をする
