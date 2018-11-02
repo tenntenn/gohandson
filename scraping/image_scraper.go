@@ -3,6 +3,9 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"image"
+	"image/jpeg"
+	"image/png"
 	"io"
 	"io/ioutil"
 	"net"
@@ -11,15 +14,43 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"strings"
 
 	"golang.org/x/net/html"
 )
+
+type ImageFormat string
+
+const (
+	FormatNotChange ImageFormat = ""
+	FormatPNG       ImageFormat = "png"
+	FormatJPEG      ImageFormat = "jpeg"
+)
+
+func (f ImageFormat) Ext() string {
+	switch f {
+	case FormatPNG:
+		return ".png"
+	case FormatJPEG:
+		return ".jpg"
+	}
+	return ""
+}
+
+func IsAllowFormat(s string) bool {
+	switch ImageFormat(s) {
+	case FormatPNG, FormatJPEG:
+		return true
+	}
+	return false
+}
 
 type ImageScraper struct {
 	AllowHost  []string
 	visited    map[string]bool
 	httpClient *http.Client
 	dir        string
+	Format     ImageFormat
 }
 
 func New(dir string) *ImageScraper {
@@ -160,6 +191,16 @@ func (s *ImageScraper) downloadImage(srcURL *url.URL) error {
 	u := *srcURL
 	u.RawQuery = ""
 	path := filepath.Join(s.dir, path.Base(u.String()))
+
+	// 変換が必要な場合は変換する
+	if s.Format != FormatNotChange {
+		if err := s.convert(resp.Body, path); err != nil {
+			return err
+		}
+		return nil
+	}
+
+	// 変換が必要ない
 	f, err := os.Create(path)
 	if err != nil {
 		return err
@@ -168,6 +209,36 @@ func (s *ImageScraper) downloadImage(srcURL *url.URL) error {
 
 	if _, err := io.Copy(f, resp.Body); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (s *ImageScraper) convert(r io.Reader, path string) error {
+	img, _, err := image.Decode(r)
+	if err != nil {
+		return err
+	}
+
+	i := strings.LastIndex(path, ".")
+	p := path[:i] + s.Format.Ext()
+
+	f, err := os.Create(p)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	switch s.Format {
+	case FormatPNG:
+		if err := png.Encode(f, img); err != nil {
+			return err
+		}
+	case FormatJPEG:
+		opts := &jpeg.Options{Quality: jpeg.DefaultQuality}
+		if err := jpeg.Encode(f, img, opts); err != nil {
+			return err
+		}
 	}
 
 	return nil
