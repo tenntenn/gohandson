@@ -53,22 +53,22 @@ const (
 こうすることで、2杯のコーヒーに必要な水の分量を`(2 * Cupscoffee).Water()`のように取得することができます。
 
 ```go
-// 1カップのコーヒーを淹れるのに必要な水の量
+// Nカップのコーヒーを淹れるのに必要な水の量
 func (cups Coffee) Water() Water {
         return Water(180*cups) / MilliLiterWater
 }
 
-// 1カップのコーヒーを淹れるのに必要なお湯の量
+// Nカップのコーヒーを淹れるのに必要なお湯の量
 func (cups Coffee) HotWater() HotWater {
         return HotWater(180*cups) / MilliLiterHotWater
 }
 
-// 1カップのコーヒーを淹れるのに必要な豆の量
+// Nカップのコーヒーを淹れるのに必要な豆の量
 func (cups Coffee) Beans() Bean {
         return Bean(20*cups) / GramBeans
 }
 
-// 1カップのコーヒーを淹れるのに必要な粉の量
+// Nカップのコーヒーを淹れるのに必要な粉の量
 func (cups Coffee) GroundBeans() GroundBean {
         return GroundBean(20*cups) / GramGroundBeans
 }
