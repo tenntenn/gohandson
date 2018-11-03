@@ -50,12 +50,12 @@ STEP 1からSTEP 6までステップごとに進めていくことで、並行�
 
 ## 目次
 
-* STEP 1: [ゴールーチンを使わずに処理する](./skeleton/src/step01)（[解答例](./solution/src/step01)）
-* STEP 2: [ボトルネックを探す](./skeleton/src/step02)（[解答例](./solution/src/step02)）
-* STEP 3: [ゴールーチンとチャネル](./skeleton/src/step03)（[解答例](./solution/src/step03)）
-* STEP 4: [syncパッケージを使う](./skeleton/src/step04)（[解答例](./solution/src/step04)）
-* STEP 5: [ゴールーチンとエラー処理](./skeleton/src/step05)（[解答例](./solution/src/step05)）
-* STEP 6: [コンテキストとキャンセル処理](./skeleton/src/step06)（[解答例](./solution/src/step06)）
+* STEP 1: [ゴールーチンを使わずに処理する](./skeleton/step01)（[解答例](./solution/step01)）
+* STEP 2: [ボトルネックを探す](./skeleton/step02)（[解答例](./solution/step02)）
+* STEP 3: [ゴールーチンとチャネル](./skeleton/step03)（[解答例](./solution/step03)）
+* STEP 4: [syncパッケージを使う](./skeleton/step04)（[解答例](./solution/step04)）
+* STEP 5: [ゴールーチンとエラー処理](./skeleton/step05)（[解答例](./solution/step05)）
+* STEP 6: [コンテキストとキャンセル処理](./skeleton/step06)（[解答例](./solution/step06)）
 
 ## ハンズオンの開催や資料の扱いについて
 この資料を元にハンズオンを開催するために@tenntennの許可などはいりません。
