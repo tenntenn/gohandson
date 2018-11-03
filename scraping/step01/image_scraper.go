@@ -82,6 +82,10 @@ func New(dir string) *ImageScraper {
 // aタグがある場合は再帰的にダウンロードを行います。
 func (s *ImageScraper) Visit(u *url.URL) error {
 
+	// フラグメントを取り除く
+	u = &(*u) // copy
+	u.Fragment = ""
+
 	urlStr := u.String()
 	if s.visited[urlStr] {
 		return nil
@@ -103,6 +107,17 @@ func (s *ImageScraper) Visit(u *url.URL) error {
 	resp, err := s.httpClient().Do(req)
 	if err != nil {
 		return err
+	}
+
+	switch {
+	case resp.StatusCode > http.StatusBadRequest:
+		return fmt.Errorf("HTTP request error with %d", resp.StatusCode)
+	case resp.StatusCode != http.StatusOK: // リダイレクトなどを無視
+		return nil
+	}
+
+	if !strings.HasPrefix(resp.Header.Get("Content-Type"), "text/html") {
+		return nil
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
