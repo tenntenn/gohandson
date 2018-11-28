@@ -1,0 +1,72 @@
+# github.com/golang/protobuf v1.2.0
+github.com/golang/protobuf/proto
+github.com/golang/protobuf/ptypes
+github.com/golang/protobuf/ptypes/any
+github.com/golang/protobuf/ptypes/duration
+github.com/golang/protobuf/ptypes/timestamp
+# github.com/konsorten/go-windows-terminal-sequences v0.0.0-20180402223658-b729f2633dfe
+github.com/konsorten/go-windows-terminal-sequences
+# github.com/mitchellh/hashstructure v1.0.0
+github.com/mitchellh/hashstructure
+# github.com/oliveagle/jsonpath v0.0.0-20180606110733-2e52cf6e6852
+github.com/oliveagle/jsonpath
+# github.com/opentracing/opentracing-go v1.0.2
+github.com/opentracing/opentracing-go
+github.com/opentracing/opentracing-go/log
+# github.com/pkg/errors v0.8.0
+github.com/pkg/errors
+# github.com/sirupsen/logrus v1.1.1
+github.com/sirupsen/logrus
+# github.com/spf13/cast v1.3.0
+github.com/spf13/cast
+# golang.org/x/crypto v0.0.0-20180904163835-0709b304e793
+golang.org/x/crypto/ssh/terminal
+# golang.org/x/net v0.0.0-20181029044818-c44066c5c816
+golang.org/x/net/context
+# golang.org/x/sys v0.0.0-20180905080454-ebe1bf3edb33
+golang.org/x/sys/unix
+golang.org/x/sys/windows
+# google.golang.org/genproto v0.0.0-20180817151627-c66870c02cf8
+google.golang.org/genproto/googleapis/rpc/status
+# google.golang.org/grpc v1.16.0
+google.golang.org/grpc/codes
+google.golang.org/grpc/status
+# gopkg.in/src-d/go-errors.v1 v1.0.0
+gopkg.in/src-d/go-errors.v1
+# gopkg.in/src-d/go-mysql-server.v0 v0.2.0
+gopkg.in/src-d/go-mysql-server.v0
+gopkg.in/src-d/go-mysql-server.v0/auth
+gopkg.in/src-d/go-mysql-server.v0/mem
+gopkg.in/src-d/go-mysql-server.v0/server
+gopkg.in/src-d/go-mysql-server.v0/sql
+gopkg.in/src-d/go-mysql-server.v0/sql/analyzer
+gopkg.in/src-d/go-mysql-server.v0/sql/expression/function
+gopkg.in/src-d/go-mysql-server.v0/sql/parse
+gopkg.in/src-d/go-mysql-server.v0/sql/plan
+gopkg.in/src-d/go-mysql-server.v0/sql/expression
+gopkg.in/src-d/go-mysql-server.v0/sql/expression/function/aggregation
+gopkg.in/src-d/go-mysql-server.v0/internal/regex
+# gopkg.in/src-d/go-vitess.v1 v1.4.0
+gopkg.in/src-d/go-vitess.v1/mysql
+gopkg.in/src-d/go-vitess.v1/sqltypes
+gopkg.in/src-d/go-vitess.v1/vt/proto/query
+gopkg.in/src-d/go-vitess.v1/vt/sqlparser
+gopkg.in/src-d/go-vitess.v1/bucketpool
+gopkg.in/src-d/go-vitess.v1/netutil
+gopkg.in/src-d/go-vitess.v1/stats
+gopkg.in/src-d/go-vitess.v1/sync2
+gopkg.in/src-d/go-vitess.v1/tb
+gopkg.in/src-d/go-vitess.v1/vt/log
+gopkg.in/src-d/go-vitess.v1/vt/proto/binlogdata
+gopkg.in/src-d/go-vitess.v1/vt/proto/replicationdata
+gopkg.in/src-d/go-vitess.v1/vt/proto/vtrpc
+gopkg.in/src-d/go-vitess.v1/vt/vterrors
+gopkg.in/src-d/go-vitess.v1/vt/vttls
+gopkg.in/src-d/go-vitess.v1/bytes2
+gopkg.in/src-d/go-vitess.v1/hack
+gopkg.in/src-d/go-vitess.v1/vt/proto/vtgate
+gopkg.in/src-d/go-vitess.v1/vt/proto/topodata
+gopkg.in/src-d/go-vitess.v1/vt/logutil
+gopkg.in/src-d/go-vitess.v1/cache
+gopkg.in/src-d/go-vitess.v1/event
+gopkg.in/src-d/go-vitess.v1/vt/proto/logutil
