@@ -6,4 +6,5 @@
 * 変数と型
 * fmt.Printを使った表示
 * fmt.Scanを使った入力
+* fmt.Printlnを使った表示
 * fmt.Printfを使った表示
