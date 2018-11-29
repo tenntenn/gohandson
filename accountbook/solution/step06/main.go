@@ -90,7 +90,7 @@ func inputItem(db *sql.DB) error {
 	return nil
 }
 
-// 一覧の表示
+// 集計結果の表示
 func showSummary(db *sql.DB) error {
 
 	// GROUP BYで品目ごとにグループ化して金額の合計を出す
