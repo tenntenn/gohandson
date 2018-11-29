@@ -15,6 +15,18 @@ type Item struct {
 
 func main() {
 
+	// inputItemという関数を呼び出し
+	// 結果をitemという変数に入れる
+	item := inputItem()
+
+	// 品目に「コーヒー」、値段に「100」と入力した場合に
+	// 「コーヒーに100円使いました」と表示する
+	fmt.Printf("%sに%d円使いました\n", item.Category, item.Price)
+}
+
+// 入力を行う関数
+// 入力したItemを返す
+func inputItem() Item {
 	// Item型のitemという名前の変数を定義する
 	var item Item
 
@@ -26,7 +38,5 @@ func main() {
 	// 入力した値をitemのPriceフィールドに入れる
 	fmt.Scan(&item.Price)
 
-	// 品目に「コーヒー」、値段に「100」と入力した場合に
-	// 「コーヒーに100円使いました」と表示する
-	fmt.Printf("%sに%d円使いました\n", item.Category, item.Price)
+	return item
 }
