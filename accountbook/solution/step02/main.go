@@ -1,3 +1,5 @@
+// STEP02: データの入力
+
 package main
 
 // fmtパッケージをインポートする
