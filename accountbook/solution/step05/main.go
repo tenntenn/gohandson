@@ -1,3 +1,5 @@
+// STEP05: データベースへの記録
+
 package main
 
 import (
