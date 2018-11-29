@@ -19,9 +19,13 @@ func main() {
 	// 結果をitemという変数に入れる
 	item := inputItem()
 
+	fmt.Println("===========")
+
 	// 品目に「コーヒー」、値段に「100」と入力した場合に
 	// 「コーヒーに100円使いました」と表示する
 	fmt.Printf("%sに%d円使いました\n", item.Category, item.Price)
+
+	fmt.Println("===========")
 }
 
 // 入力を行う関数
