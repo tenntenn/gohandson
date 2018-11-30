@@ -115,8 +115,7 @@ func showItems(db *sql.DB) error {
 	}
 	fmt.Println("===========")
 
-	err := rows.Err()
-	if err != nil {
+	if err := rows.Err(); err != nil {
 		return err
 	}
 

@@ -12,3 +12,10 @@
 * ラベルつきbreak
 * switch
 * for range
+
+## 動かし方
+
+```
+$ go build -v -o step07
+$ ./step07
+```
