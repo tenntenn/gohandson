@@ -64,6 +64,14 @@ go getしてslackのライブラリをいれる。
 $ go get -u github.com/nlopes/slack/...
 ```
 
+バージョンv0.3.0を使う。
+
+```
+$ cd ~/gopath/src/github.com/nlopes/slack
+$ git checkout v0.3.0
+$ cd ~/gohandson/slackbot/ja/solution/step1/src
+```
+
 app.yamlの以下の部分をSlack Appの管理画面からコピーして貼り付ける。
 
 ```yaml
@@ -83,7 +91,6 @@ env_variables:
 Cloud ShellでGAEのアプリケーションをデプロイする。
 
 ```
-$ cd step1/src
 $ goapp deploy --application <APP_ID> --version <VERSION> .
 ```
 
