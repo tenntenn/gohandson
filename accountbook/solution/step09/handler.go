@@ -16,7 +16,7 @@ func NewHandlers(ab *AccountBook) *Handlers {
 	return &Handlers{ab: ab}
 }
 
-// Listで仕様するテンプレート
+// ListHandlerで仕様するテンプレート
 var listTmpl = template.Must(template.New("list").Parse(`<!DOCTYPE html>
 <html>
 	<head>
