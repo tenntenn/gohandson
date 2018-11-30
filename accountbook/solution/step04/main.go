@@ -11,15 +11,13 @@ type Item struct {
 
 func main() {
 
-	// 複数のItem型の値を記録するために
-	// itemsという名前のItem型のスライスの変数を定義
-	var items []Item
-
 	// 入力するデータの件数を入力する
 	var n int
 	fmt.Print("何件入力しますか>")
 	fmt.Scan(&n)
 
+	// 複数のItem型の値を記録するために
+	// itemsという名前のItem型のスライスの変数を定義
 	// 長さ0で容量がnのスライスを作る
 	items := make([]Item, 0, n)
 
