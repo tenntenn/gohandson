@@ -54,6 +54,10 @@ golang.tokyoのハンズオンを参考に、Cloud Shellが使えるようにす
 
 Cloud Shellでソースコードを`git clone`してくる。
 
+```
+$ git clone https://github.com/tenntenn/gohandson.git
+```
+
 go getしてslackのライブラリをいれる。
 
 ```
