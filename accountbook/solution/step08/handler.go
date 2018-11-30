@@ -24,8 +24,8 @@ var listTmpl = template.Must(template.New("list").Parse(`<!DOCTYPE html>
 	</head>
 	<body>
 		<h1>家計簿</h1>
-		{{- if . -}}
 		<h2>最新{{len .}}件</h2>
+		{{- if . -}}
 		<table border="1">
 			<tr><th>品目</th><th>値段</th></tr>
 			{{- range .}}
