@@ -3,3 +3,9 @@
 ## 新しく学ぶこと
 
 * Google Chart API
+
+
+```
+$ go build -v -o step10
+$ ./step10
+```
