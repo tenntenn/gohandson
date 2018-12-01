@@ -11,6 +11,24 @@
 * defer
 * fmt.Printfの%04d
 
+## SQLiteのライブラリのための準備
+
+参考: https://github.com/mattn/go-sqlite3#compilation
+
+### macOS
+
+homebrewでSQLiteをいれる。
+
+```
+$ brew install sqlite3
+```
+
+### Windows
+
+Cのコンパイラが必要なため、gccを入れる。
+
+https://sourceforge.net/projects/tdm-gcc/
+
 ## 動かし方
 
 ```
