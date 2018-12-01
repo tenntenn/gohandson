@@ -9,6 +9,8 @@ import (
 
 	// SQLiteのドライバを使うためにインポートするが直接は使わない
 	_ "github.com/mattn/go-sqlite3"
+	// Windowsの場合は以下を使う
+	// _ "modernc.org/sqlite"
 )
 
 type Item struct {
@@ -24,6 +26,8 @@ func main() {
 	// ドライバにはSQLiteを使って、
 	// accountbook.dbというファイルでデータベース接続を行う
 	db, err := sql.Open("sqlite3", "accountbook.db")
+	// Windowsの場合は以下を使う
+	// db, err := sql.Open("sqlite", "accountbook.db")
 	if err != nil {
 		log.Fatal(err)
 	}
