@@ -12,3 +12,11 @@
 $ go build -v -o step01
 $ ./step01
 ```
+
+※ Windowsの方は以下のように後ろに.exeつけてください。
+他のステップでも同様につけておいてください。
+
+```
+$ go build -v -o step01.exe
+$ .¥step01.exe
+```
