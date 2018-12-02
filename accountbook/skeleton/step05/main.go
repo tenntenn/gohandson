@@ -6,11 +6,9 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-
-	// SQLiteのドライバを使うためにインポートするが直接は使わない
-	_ "github.com/mattn/go-sqlite3"
-	// Windowsの場合は以下を使う
-	// _ "modernc.org/sqlite"
+	// TODO:
+	// SQLiteのドライバを使うために
+	// "github.com/tenntenn/sqlite"をインポートする
 )
 
 type Item struct {
@@ -25,7 +23,7 @@ func main() {
 	// TODO:
 	// データベースへ接続
 	// ドライバにはSQLiteを使って、
-	// ドライバ名はWindowsはsqlite、macOSはsqlite3
+	// ドライバ名はsqlite.DriverName
 	// accountbook.dbというファイルでデータベース接続を行う
 	if err != nil {
 		log.Fatal(err)
