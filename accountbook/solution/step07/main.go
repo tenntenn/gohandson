@@ -7,8 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	// SQLiteのドライバを使うためにインポートするが直接は使わない
-	_ "github.com/mattn/go-sqlite3"
+	"github.com/tenntenn/sqlite"
 )
 
 func main() {
@@ -16,7 +15,7 @@ func main() {
 	// データベースへ接続
 	// ドライバにはSQLiteを使って、
 	// accountbook.dbというファイルでデータベース接続を行う
-	db, err := sql.Open("sqlite3", "accountbook.db")
+	db, err := sql.Open(sqlite.DriverName, "accountbook.db")
 	if err != nil {
 		// 標準エラー出力（os.Stderr)にエラーメッセージを出力して終了
 		fmt.Fprintln(os.Stderr, "エラー：", err)
