@@ -49,7 +49,7 @@ func convert(dst, src string) error {
 	case ".png":
 		err = png.Encode(df, img)
 	case ".jpeg", ".jpg":
-		err = jpeg.Encode(df, img, &jpeg.Options{jpeg.DefaultQuality})
+		err = jpeg.Encode(df, img, &jpeg.Options{Quality: jpeg.DefaultQuality})
 	}
 
 	if err != nil {
