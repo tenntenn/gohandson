@@ -36,6 +36,7 @@ func main() {
 	http.HandleFunc("/", hs.ListHandler)
 	http.HandleFunc("/save", hs.SaveHandler)
 	http.HandleFunc("/summary", hs.SummaryHandler)
+	http.HandleFunc("/chart", hs.ChartHandler)
 
 	fmt.Println("http://localhost:8080 で起動中...")
 	// HTTPサーバを起動する
