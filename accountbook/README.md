@@ -37,5 +37,5 @@ $ cd ↑のディレクトリに移動
 $ mkdir -p src/github.com/tenntenn/
 $ cd src/github.com/tenntenn
 $ git clone https://github.com/tenntenn/gohandson.git
-$ cd accountbook
+$ cd gohandson/accountbook
 ```
