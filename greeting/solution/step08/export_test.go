@@ -1,4 +1,4 @@
-// STEP07: テストヘルパーを作ってみよう
+// STEP08: テーブル駆動テストを行おう
 package greeting
 
 import "golang.org/x/text/language"

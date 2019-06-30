@@ -1,3 +1,4 @@
+// STEP06: テストのパッケージを分けよう
 package greeting
 
 import "golang.org/x/text/language"
