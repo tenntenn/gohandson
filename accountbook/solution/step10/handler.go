@@ -4,6 +4,9 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"strings"
+
+	"github.com/wcharczuk/go-chart"
 )
 
 // HTTPハンドラを集めた型
@@ -104,29 +107,16 @@ var summaryTmpl = template.Must(template.New("summary").Parse(`<!DOCTYPE html>
 	<head>
 		<meta charset="utf-8"/>
 		<title>家計簿 集計</title>
-		<script src="https://www.gstatic.com/charts/loader.js"></script>
-		<script>
-			google.charts.load('current', {'packages':['corechart']});
-			google.charts.setOnLoadCallback(drawChart);
-
-			function drawChart() {
-			var data = google.visualization.arrayToDataTable([
-				['品目', '値段'],
-				{{- range . -}}
-				['{{js .Category}}', {{.Sum}}],
-				{{- end -}}
-			]);
-		
-		var options = { title: '割合' };
-		var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-		chart.draw(data, options);
-		}
-		</script>
 	</head>
 	<body>
 		<h1>集計</h1>
 		{{- if . -}}
-		<div id="piechart" style="width:400px; height:300px;"></div>
+		<img src="/chart?w=400&h=300
+			{{- /* 値 */ -}}
+			&v={{- range . -}}{{.Sum}},{{- end -}}
+			{{- /* ラベル */ -}}
+			&l={{- range . -}}{{.Category}},{{- end -}}
+		">
 		<table border="1">
 			<tr><th>品目</th><th>合計</th><th>平均</th></tr>
 			{{- range .}}
@@ -151,6 +141,69 @@ func (hs *Handlers) SummaryHandler(w http.ResponseWriter, r *http.Request) {
 
 	// 取得した集計結果をテンプレートに埋め込む
 	if err := summaryTmpl.Execute(w, summaries); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+// グラフを生成するハンドラ
+func (hs *Handlers) ChartHandler(w http.ResponseWriter, r *http.Request) {
+
+	// 幅を取得する
+	width, err := strconv.Atoi(r.FormValue("w"))
+	if err != nil {
+		// デフォルトの幅
+		width = 200
+	}
+
+	// 高さを取得する
+	height, err := strconv.Atoi(r.FormValue("h"))
+	if err != nil {
+		// デフォルトの高さ
+		height = 200
+	}
+
+	// 値を入れるスライス
+	var vs []float64
+	// カンマ区切り（末尾のカンマは無視）を分解し、float64に変換する
+	for _, s := range strings.Split(strings.TrimRight(r.FormValue("v"), ","), ",") {
+		// 64ビットの浮動小数点数として文字列をパースする
+		v, err := strconv.ParseFloat(s, 64)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		vs = append(vs, v)
+	}
+
+	// ラベルを入れるスライス
+	var ls []string
+	// カンマ区切り（末尾のカンマは無視）を分解し、float64に変換する
+	for _, l := range strings.Split(strings.TrimRight(r.FormValue("l"), ","), ",") {
+		ls = append(ls, l)
+	}
+
+	// 値とラベルの数が一致しないとエラー
+	if len(vs) != len(ls) {
+		http.Error(w, "値とラベルの数が一致しません", http.StatusBadRequest)
+		return
+	}
+
+	pie := chart.PieChart{
+		Width:  width,
+		Height: height,
+	}
+
+	for i := range vs {
+		v := chart.Value{
+			Value: vs[i],
+			Label: ls[i],
+		}
+		pie.Values = append(pie.Values, v)
+	}
+
+	w.Header().Set("Content-Type", chart.ContentTypePNG)
+	if err := pie.Render(chart.PNG, w); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
