@@ -1,4 +1,4 @@
-// STEP03: パッケージを分けてみよう
+// STEP04: 外部パッケージを使ってみよう
 package greeting
 
 import (
