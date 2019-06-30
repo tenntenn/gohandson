@@ -12,7 +12,7 @@ import (
 
 // Greeting.Doメソッドのテスト
 func TestGreeting_Do(t *testing.T) {
-	// 言語を日本語にしておき、関数実行時に元に戻す
+	// TODO: 言語を日本語にしておき、関数実行時に元に戻す
 	defer greeting.ExportSetLang(language.Japanese)()
 
 	// greeting.Greeting型の値を作る

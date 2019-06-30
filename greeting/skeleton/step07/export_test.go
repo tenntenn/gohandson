@@ -1,4 +1,4 @@
-// STEP06: テストのパッケージを分けよう
+// STEP07: テストヘルパーを作ってみよう
 package greeting
 
 import "golang.org/x/text/language"
@@ -10,7 +10,6 @@ func ExportSetLang(l language.Tag) func() {
 	orgLang := lang
 	lang = l
 	return func() {
-		// langを元に戻す
 		lang = orgLang
 	}
 }

@@ -36,7 +36,7 @@ type errorWriter struct {
 
 // フィールドにエラーが設定されていたらそのエラーを返す
 func (w *errorWriter) Write(p []byte) (n int, err error) {
-	return 0, w.Err
+	// TODO: フィールドに設定されているエラーを返す
 }
 
 // Greeting.Doメソッドのテスト
@@ -54,7 +54,7 @@ func TestGreeting_Do(t *testing.T) {
 		"04時": {new(bytes.Buffer), mockClock(t, "2018/08/31 04:00:00"), "おはよう", false},
 		"09時": {new(bytes.Buffer), mockClock(t, "2018/08/31 09:00:00"), "おはよう", false},
 		"10時": {new(bytes.Buffer), mockClock(t, "2018/08/31 10:00:00"), "こんにちは", false},
-		"16時": {new(bytes.Buffer), mockClock(t, "2018/08/31 16:00:00"), "こんにちは", false},
+		/* TODO: 16時のテスト */
 		"17時": {new(bytes.Buffer), mockClock(t, "2018/08/31 17:00:00"), "こんばんは", false},
 		"03時": {new(bytes.Buffer), mockClock(t, "2018/08/31 03:00:00"), "こんばんは", false},
 		"エラー": {&errorWriter{Err: errors.New("error")}, nil, "", true},
@@ -72,7 +72,7 @@ func TestGreeting_Do(t *testing.T) {
 			case err == nil && tt.expectErr:
 				t.Error("expected error did not occur")
 			// エラーは期待してないのにエラーが発生した
-			case err != nil && !tt.expectErr:
+			case /* TODO: 条件 */:
 				t.Error("unexpected error:", err)
 			}
 
