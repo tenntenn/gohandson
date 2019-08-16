@@ -1,10 +1,9 @@
-runtime: go
-api_version: go1.9
-module: slackbot
+runtime: go112
+module: default
 
 handlers:
 - url: /.*
-  script: _go_app
+  script: auto
   secure: always
 
 env_variables:
