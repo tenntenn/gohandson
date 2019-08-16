@@ -1,5 +1,5 @@
 runtime: go112
-module: default
+service: slackbot
 
 handlers:
 - url: /.*
