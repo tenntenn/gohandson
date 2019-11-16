@@ -1,14 +1,13 @@
-# STEP08: 一覧ページの作成
+# STEP08: 品目ごとの集計
 
 ## 新しく学ぶこと
 
-* HTTPハンドラ
-* HTTPサーバの起動
-* html/templateの使い方
+* GROUP BYと集約関数（sum, count）
+* fmt.Printfの\tと%f
+* float64
+* キャスト
 
 ## 動かし方
-
-`accountbook.db`はSTEP07のプログラムで作ったものを利用しましょう。
 
 ```
 $ go build -v -o step08
