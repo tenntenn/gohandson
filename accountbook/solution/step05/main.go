@@ -71,7 +71,7 @@ func inputItem(file *os.File) error {
 		return err
 	}
 
-	// エラーが無かった
+	// エラーがなかったことを表すnilを返す
 	return nil
 }
 
@@ -97,7 +97,7 @@ func showItems() error {
 		splited := strings.Split(line, " ")
 		// 2つに分割できなかった場合はエラー
 		if len(splited) != 2 {
-			// エラーを生成して返す
+			// 「パースに失敗しました」というエラーを生成して返す
 			return errors.New("パースに失敗しました")
 		}
 

@@ -76,10 +76,12 @@ func (ab *AccountBook) GetItems(limit int) ([]*Item, error) {
 		return nil, err
 	}
 
+	// limit件より少ない場合は全件返す
 	if len(items) < limit {
 		return items, nil
 	}
 
+	// itemsの後方limit件だけを返す
 	return items[len(items)-limit : len(items) : len(items)], nil
 }
 
