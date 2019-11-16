@@ -1,21 +1,22 @@
-// STEP07: ブラッシュアップ
+// STEP07: データベースへの記録
 
 package main
 
 import (
-	"database/sql"
 	"fmt"
 	"os"
-
-	"github.com/tenntenn/sqlite"
+	// TODO:
+	// SQLiteのドライバを使うために
+	// "github.com/tenntenn/sqlite"をインポートする
 )
 
 func main() {
 
+	// TODO:
 	// データベースへ接続
 	// ドライバにはSQLiteを使って、
+	// ドライバ名はsqlite.DriverName
 	// accountbook.dbというファイルでデータベース接続を行う
-	db, err := sql.Open(sqlite.DriverName, "accountbook.db")
 	if err != nil {
 		// 標準エラー出力（os.Stderr)にエラーメッセージを出力して終了
 		fmt.Fprintln(os.Stderr, "エラー：", err)
@@ -39,7 +40,7 @@ LOOP: // 以下のループにラベル「LOOP」をつける
 
 		// モードを選択して実行する
 		var mode int
-		fmt.Println("[1]入力 [2]最新10件 [3]集計 [4]終了")
+		fmt.Println("[1]入力 [2]最新10件 [3]終了")
 		fmt.Printf(">")
 		fmt.Scan(&mode)
 
@@ -60,18 +61,12 @@ LOOP: // 以下のループにラベル「LOOP」をつける
 			items, err := ab.GetItems(10)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, "エラー:", err)
-				// TODO: LOOPという名前のついたforから抜け出す
-			}
-			showItems(items)
-		case 3: // 集計
-			summaries, err := ab.GetSummaries()
-			if err != nil {
-				// TODO: os.Stderrにエラーメッセージを出す
 				break LOOP
 			}
-			showSummary(summaries)
-
-			// TODO: 4のとき「終了します」と出力して終了する
+			showItems(items)
+		case 3: // 終了
+			fmt.Println("終了します")
+			return
 		}
 	}
 }
@@ -95,19 +90,6 @@ func showItems(items []*Item) {
 	// itemsの要素を1つずつ取り出してitemに入れて繰り返す
 	for _, item := range items {
 		fmt.Printf("[%04d] %s:%d円\n", item.ID, item.Category, item.Price)
-	}
-	fmt.Println("===========")
-}
-
-// 集計を出力する
-func showSummary( /* TODO: 集計結果を受け取る */ ) {
-	fmt.Println("===========")
-	// タブ区切りで「品目 個数 合計 平均」を出力
-	fmt.Printf("品目\t個数\t合計\t平均\n")
-	// summariesの要素を1つずつ取り出してsに入れて繰り返す
-	for _, s := range summaries {
-		// TODO: 第2引数以降に品目、個数、合計、平均を渡す
-		fmt.Printf("%s\t%d\t%d円\t%.2f円\n" /* ここに追加 */)
 	}
 	fmt.Println("===========")
 }
