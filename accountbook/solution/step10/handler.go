@@ -34,7 +34,7 @@ var listTmpl = template.Must(template.New("list").Parse(`<!DOCTYPE html>
 			<input type="submit" value="保存">
 		</form>
 
-		<h2>最新{{len .}}件(<a href="/summary">集計</a>)</h2>
+		<h2>最新{{len .}}件</h2>
 		{{- if . -}}
 		<table border="1">
 			<tr><th>品目</th><th>値段</th></tr>
@@ -96,62 +96,4 @@ func (hs *Handlers) SaveHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.Redirect(w, r, "/", http.StatusFound)
-}
-
-// SummaryHandlerで仕様するテンプレート
-var summaryTmpl = template.Must(template.New("summary").Parse(`<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8"/>
-		<title>家計簿 集計</title>
-		<script src="https://www.gstatic.com/charts/loader.js"></script>
-		<script>
-			google.charts.load('current', {'packages':['corechart']});
-			google.charts.setOnLoadCallback(drawChart);
-
-			function drawChart() {
-			var data = google.visualization.arrayToDataTable([
-				['品目', '値段'],
-				{{- range . -}}
-				['{{js .Category}}', {{.Sum}}],
-				{{- end -}}
-			]);
-		
-		var options = { title: '割合' };
-		var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-		chart.draw(data, options);
-		}
-		</script>
-	</head>
-	<body>
-		<h1>集計</h1>
-		{{- if . -}}
-		<div id="piechart" style="width:400px; height:300px;"></div>
-		<table border="1">
-			<tr><th>品目</th><th>合計</th><th>平均</th></tr>
-			{{- range .}}
-			<tr><td>{{.Category}}</td><td>{{.Sum}}円</td><td>{{.Avg}}円</tr>
-			{{- end}}
-		</table>
-		{{- else}}
-			データがありません
-		{{- end}}
-
-		<div><a href="/">一覧に戻る</a></div>
-	</body>
-</html>`))
-
-// 集計を表示するハンドラ
-func (hs *Handlers) SummaryHandler(w http.ResponseWriter, r *http.Request) {
-	summaries, err := hs.ab.GetSummaries()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	// 取得した集計結果をテンプレートに埋め込む
-	if err := summaryTmpl.Execute(w, summaries); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
 }
