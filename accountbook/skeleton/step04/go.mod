@@ -1,1 +1,3 @@
-module github.com/tenntenn/gohandson/accountbook/skeleton/step04
+module github.com/tenntenn/gohandson/accountbook/solution/step04
+
+go 1.13
