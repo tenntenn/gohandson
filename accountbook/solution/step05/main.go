@@ -32,8 +32,7 @@ func main() {
 	fmt.Print("何件入力しますか>")
 	fmt.Scan(&n)
 
-	// iが0からitemsの容量-1の間繰り返す(n回繰り返す）
-	// cap(items)はitemsの容量を返す
+	// n回繰り返す
 	for i := 0; i < n; i++ {
 		if err := inputItem(file); err != nil {
 			// エラーを出力して終了する
