@@ -3,6 +3,7 @@
 ## 新しく学ぶこと
 
 * ファイルへの保存
+* defer
 * エラー処理
 * bufio.Scanner
 * strings.Split
