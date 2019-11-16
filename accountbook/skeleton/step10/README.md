@@ -1,11 +1,15 @@
-# STEP10: 集計ページの作成
+# STEP10: 入力ページの作成
 
 ## 新しく学ぶこと
 
-* Google Chart API
+* HTMLのform
+* HTTPメソッドの取得
+* POSTされたデータの取得
+* リダイレクト
 
+## 動かし方
 
 ```
-$ go build -v -o step10
-$ ./step10
+$ go build -v -o step09
+$ ./step09
 ```
