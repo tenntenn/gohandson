@@ -60,6 +60,8 @@ func (ab *AccountBook) GetItems(limit int) ([]*Item, error) {
 	defer rows.Close() // 関数終了時にCloseが呼び出される
 
 	var items []*Item
+	// 1つずつ取得した行をみる
+	// rows.Nextはすべての行を取得し終わるとfalseを返す
 	for rows.Next() {
 		var item Item
 		err := rows.Scan(&item.ID, &item.Category, &item.Price)
