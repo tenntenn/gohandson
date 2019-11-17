@@ -1,4 +1,4 @@
-// STEP09: 一覧ページの作成
+// STEP11: 集計ページの作成
 
 package main
 
@@ -34,6 +34,8 @@ func main() {
 
 	// ハンドラの登録
 	http.HandleFunc("/", hs.ListHandler)
+	http.HandleFunc("/save", hs.SaveHandler)
+	http.HandleFunc("/summary", hs.SummaryHandler)
 
 	fmt.Println("http://localhost:8080 で起動中...")
 	// HTTPサーバを起動する

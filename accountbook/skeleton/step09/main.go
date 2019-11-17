@@ -1,4 +1,4 @@
-// STEP09: 入力ページの作成
+// STEP09: 一覧ページの作成
 
 package main
 
@@ -32,9 +32,7 @@ func main() {
 	// HandlersをNewHandlersを使って作成
 	hs := NewHandlers(ab)
 
-	// ハンドラの登録
-	http.HandleFunc("/", hs.ListHandler)
-	// TODO: SaveHandlerの登録
+	// TODO: ハンドラの登録
 
 	fmt.Println("http://localhost:8080 で起動中...")
 	// HTTPサーバを起動する

@@ -1,4 +1,4 @@
-// STEP07: ブラッシュアップ
+// STEP07: データベースへの記録
 
 package main
 
@@ -39,7 +39,7 @@ LOOP: // 以下のループにラベル「LOOP」をつける
 
 		// モードを選択して実行する
 		var mode int
-		fmt.Println("[1]入力 [2]最新10件 [3]集計 [4]終了")
+		fmt.Println("[1]入力 [2]最新10件 [3]終了")
 		fmt.Printf(">")
 		fmt.Scan(&mode)
 
@@ -63,14 +63,7 @@ LOOP: // 以下のループにラベル「LOOP」をつける
 				break LOOP
 			}
 			showItems(items)
-		case 3: // 集計
-			summaries, err := ab.GetSummaries()
-			if err != nil {
-				fmt.Fprintln(os.Stderr, "エラー:", err)
-				break LOOP
-			}
-			showSummary(summaries)
-		case 4: // 終了
+		case 3: // 終了
 			fmt.Println("終了します")
 			return
 		}
@@ -96,18 +89,6 @@ func showItems(items []*Item) {
 	// itemsの要素を1つずつ取り出してitemに入れて繰り返す
 	for _, item := range items {
 		fmt.Printf("[%04d] %s:%d円\n", item.ID, item.Category, item.Price)
-	}
-	fmt.Println("===========")
-}
-
-// 集計を出力する
-func showSummary(summaries []*Summary) {
-	fmt.Println("===========")
-	// タブ区切りで「品目 個数 合計 平均」を出力
-	fmt.Printf("品目\t個数\t合計\t平均\n")
-	// summariesの要素を1つずつ取り出してsに入れて繰り返す
-	for _, s := range summaries {
-		fmt.Printf("%s\t%d\t%d円\t%.2f円\n", s.Category, s.Count, s.Sum, s.Avg())
 	}
 	fmt.Println("===========")
 }

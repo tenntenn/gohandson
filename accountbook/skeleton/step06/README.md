@@ -1,12 +1,18 @@
-# STEP06: 品目ごとの集計
+# STEP06: ブラッシュアップ
 
 ## 新しく学ぶこと
 
-* GROUP BYと集約関数（sum, count）
-* fmt.Printfの\tと%f
-* varのグルーピング
-* float64
-* キャスト
+* メソッド
+* 複数の戻り値
+* fmt.Fprintln
+* os.Stderr
+* os.Exit
+* ポインタ
+* 無限ループ
+* ラベルつきbreak
+* switch
+* for range
+* スライス演算
 
 ## 動かし方
 

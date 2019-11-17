@@ -1,75 +1,55 @@
-// STEP06: 品目ごとの集計
+// STEP06: ブラッシュアップ
 
 package main
 
 import (
-	"database/sql"
 	"fmt"
-	"log"
-
-	"github.com/tenntenn/sqlite"
+	"os"
 )
-
-type Item struct {
-	// IDはデータベースに記録した際に振られるID
-	ID       int
-	Category string
-	Price    int
-}
 
 func main() {
 
-	// データベースへ接続
-	// ドライバにはSQLiteを使って、
-	// accountbook.dbというファイルでデータベース接続を行う
-	db, err := sql.Open(sqlite.DriverName, "accountbook.db")
-	if err != nil {
-		log.Fatal(err)
-	}
+	// AccountBookをNewAccountBookを使って作成
+	ab := NewAccountBook("accountbook.txt")
 
-	// テーブルを作成（なければ）する
-	if err := createTable(db); err != nil {
-		log.Fatal(err)
-	}
+LOOP: // 以下のループにラベル「LOOP」をつける
+	for {
 
-	var n int
-	fmt.Print("何件入力しますか>")
-	fmt.Scan(&n)
+		// モードを選択して実行する
+		var mode int
+		fmt.Println("[1]入力 [2]最新10件 [3]終了")
+		fmt.Printf(">")
+		fmt.Scan(&mode)
 
-	// 入力
-	for i := 0; i < n; i++ {
-		if err := inputItem(db); err != nil {
-			log.Fatal(err)
+		// モードによって処理を変える
+		switch mode {
+		case 1: // 入力
+			var n int
+			fmt.Print("何件入力しますか>")
+			fmt.Scan(&n)
+
+			for i := 0; i < n; i++ {
+				if err := ab.AddItem(inputItem()); err != nil {
+					fmt.Fprintln(os.Stderr, "エラー:", err)
+					break LOOP
+				}
+			}
+		case 2: // 最新10件
+			items, err := ab.GetItems(10)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, "エラー:", err)
+				break LOOP
+			}
+			showItems(items)
+		case 3: // 終了
+			fmt.Println("終了します")
+			return
 		}
 	}
-
-	// 品目ごとの集計結果を出力
-	if err := showSummary(db); err != nil {
-		log.Fatal(err)
-	}
 }
 
-// テーブルの作成
-// SQLのCREATE文を使ってテーブルを作成する
-// エラーが発生した場合にはそのまま返す
-func createTable(db *sql.DB) error {
-	const sqlStr = `CREATE TABLE IF NOT EXISTS items(
-		id        INTEGER PRIMARY KEY,
-		category  TEXT NOT NULL,
-		price     INTEGER NOT NULL
-	);`
-
-	_, err := db.Exec(sqlStr)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// 入力を行いデータベースに保存する
-// エラーが発生した場合にはそのまま返す
-func inputItem(db *sql.DB) error {
+// Itemを入力し返す
+func inputItem() *Item {
 	var item Item
 
 	fmt.Print("品目>")
@@ -78,61 +58,15 @@ func inputItem(db *sql.DB) error {
 	fmt.Print("値段>")
 	fmt.Scan(&item.Price)
 
-	// SQLのINSERTを使ってデータベースに保存する
-	// ?の部分にcategoryやpriceの値が来る
-	const sqlStr = `INSERT INTO items(category, price) VALUES (?,?);`
-	_, err := db.Exec(sqlStr, item.Category, item.Price)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return &item
 }
 
-// 集計結果の表示
-func showSummary(db *sql.DB) error {
-
-	// GROUP BYで品目ごとにグループ化して金額の合計を出す
-	const sqlStr = `
-	SELECT
-		category,
-		COUNT(1) as count,
-		SUM(price) as sum
-	FROM
-		items
-	GROUP BY
-		category`
-	rows, err := db.Query(sqlStr)
-	if err != nil {
-		return err
-	}
-	defer rows.Close() // 関数終了時にCloseが呼び出される
-
+// Itemの一覧を出力する
+func showItems(items []*Item) {
 	fmt.Println("===========")
-	// タブ区切りで「品目 個数 合計 平均」を出力
-	fmt.Printf("品目\t個数\t合計\t平均\n")
-	// 1つずつ取得した行をみる
-	// rows.Nextはすべての行を取得し終わるとfalseを返す
-	for rows.Next() {
-		var (
-			category string
-			sum      int
-			count    int
-		)
-		// rows.Scanで取得した行からデータを取り出し変数に入れる
-		err := rows.Scan(&category, &count, &sum)
-		if err != nil {
-			return err
-		}
-		avg := float64(sum) / float64(count)
-		fmt.Printf("%s\t%d\t%d円\t%.2f円\n", category, count, sum, avg)
+	// itemsの要素を1つずつ取り出してitemに入れて繰り返す
+	for _, item := range items {
+		fmt.Printf("%s:%d円\n", item.Category, item.Price)
 	}
 	fmt.Println("===========")
-
-	err = rows.Err()
-	if err != nil {
-		return err
-	}
-
-	return nil
 }

@@ -1,33 +1,13 @@
-# STEP05: データベースへの記録
+# STEP05: ファイルへの保存
 
 ## 新しく学ぶこと
 
-* サードパーティパッケージの使い方
-* エラー処理
-* database/sqlパッケージの使い方
- * テーブルの作成
- * INSERT
- * SELECT
+* ファイルへの保存
 * defer
-* fmt.Printfの%04d
-
-## SQLiteのライブラリのための準備
-
-参考: https://github.com/mattn/go-sqlite3#compilation
-
-### macOS
-
-homebrewでSQLiteをいれる。
-
-```
-$ brew install sqlite3
-```
-
-### Windows
-
-Cのコンパイラが必要なため、gccを入れる。
-
-https://sourceforge.net/projects/tdm-gcc/
+* エラー処理
+* bufio.Scanner
+* strings.Split
+* strconv.Atoi
 
 ## 動かし方
 

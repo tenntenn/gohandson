@@ -1,3 +1,5 @@
-module github.com/tenntenn/gohandson/accountbook/skeleton/step07
+module github.com/tenntenn/gohandson/accountbook/solution/step07
 
-require github.com/tenntenn/sqlite v0.0.0-20181202003551-51bf2e1b84b2
+go 1.13
+
+require github.com/tenntenn/sqlite v1.0.0

@@ -1,17 +1,13 @@
-# STEP07: ブラッシュアップ
+# STEP07: データベースへの記録
 
 ## 新しく学ぶこと
 
-* メソッド
-* 複数の戻り値
-* fmt.Fprintln
-* os.Stderr
-* os.Exit
-* ポインタ
-* 無限ループ
-* ラベルつきbreak
-* switch
-* for range
+* サードパーティパッケージの使い方
+* database/sqlパッケージの使い方
+ * テーブルの作成
+ * INSERT
+ * SELECT
+* fmt.Printfの%04d
 
 ## 動かし方
 

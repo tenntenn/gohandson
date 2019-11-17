@@ -1,75 +1,60 @@
-// STEP05: データベースへの記録
+// STEP05: ファイルへの保存
 
 package main
 
 import (
-	"database/sql"
+	"bufio"
+	"errors"
 	"fmt"
 	"log"
-
-	"github.com/tenntenn/sqlite"
+	"os"
+	"strconv"
+	"strings"
 )
 
 type Item struct {
-	// IDはデータベースに記録した際に振られるID
-	ID       int
 	Category string
 	Price    int
 }
 
 func main() {
 
-	// データベースへ接続
-	// ドライバにはSQLiteを使って、
-	// accountbook.dbというファイルでデータベース接続を行う
-	db, err := sql.Open(sqlite.DriverName, "accountbook.db")
+	// "accountbook.txt"という名前のファイルを書き込み用で開く
+	file, err := os.Create("accountbook.txt")
+	// 開く場合にエラーが発生した場合
 	if err != nil {
+		// エラーを出力して終了する
 		log.Fatal(err)
 	}
 
-	// テーブルを作成（なければ）する
-	if err := createTable(db); err != nil {
-		log.Fatal(err)
-	}
-
+	// 入力するデータの件数を入力する
 	var n int
 	fmt.Print("何件入力しますか>")
 	fmt.Scan(&n)
 
-	// 入力
+	// n回繰り返す
 	for i := 0; i < n; i++ {
-		if err := inputItem(db); err != nil {
+		if err := inputItem(file); err != nil {
+			// エラーを出力して終了する
 			log.Fatal(err)
 		}
 	}
 
-	// 一覧の出力
-	if err := showItems(db); err != nil {
+	if err := file.Close(); err != nil {
+		// エラーを出力して終了する
+		log.Fatal(err)
+	}
+
+	// 表示
+	if err := showItems(); err != nil {
+		// エラーを出力して終了する
 		log.Fatal(err)
 	}
 }
 
-// テーブルの作成
-// SQLのCREATE文を使ってテーブルを作成する
+// 入力を行いファイルに保存する
 // エラーが発生した場合にはそのまま返す
-func createTable(db *sql.DB) error {
-	const sqlStr = `CREATE TABLE IF NOT EXISTS items(
-		id        INTEGER PRIMARY KEY,
-		category  TEXT NOT NULL,
-		price     INTEGER NOT NULL
-	);`
-
-	_, err := db.Exec(sqlStr)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// 入力を行いデータベースに保存する
-// エラーが発生した場合にはそのまま返す
-func inputItem(db *sql.DB) error {
+func inputItem(file *os.File) error {
 	var item Item
 
 	fmt.Print("品目>")
@@ -78,45 +63,63 @@ func inputItem(db *sql.DB) error {
 	fmt.Print("値段>")
 	fmt.Scan(&item.Price)
 
-	// SQLのINSERTを使ってデータベースに保存する
-	// ?の部分にcategoryやpriceの値が来る
-	const sqlStr = `INSERT INTO items(category, price) VALUES (?,?);`
-	_, err := db.Exec(sqlStr, item.Category, item.Price)
-	if err != nil {
+	// ファイルに書き出す
+	// 「品目 値段」のように書き出す
+	line := fmt.Sprintf("%s %d\n", item.Category, item.Price)
+	if _, err := file.WriteString(line); err != nil {
+		// エラーが発生した場合はエラーを返す
 		return err
 	}
 
+	// エラーがなかったことを表すnilを返す
 	return nil
 }
 
-// 一覧の表示
-func showItems(db *sql.DB) error {
+// 一覧の表示を行う関数
+func showItems() error {
 
-	// SELECTでitemsテーブルのすべて行を取得する
-	const sqlStr = `SELECT * FROM items`
-	rows, err := db.Query(sqlStr)
+	// "accountbook.txt"という名前のファイルを読み込み用で開く
+	file, err := os.Open("accountbook.txt")
+	// 開く場合にエラーが発生した場合
 	if err != nil {
 		return err
 	}
-	defer rows.Close() // 関数終了時にCloseが呼び出される
 
 	fmt.Println("===========")
-	// 1つずつ取得した行をみる
-	// rows.Nextはすべての行を取得し終わるとfalseを返す
-	for rows.Next() {
-		var item Item
-		// rows.Scanで取得した行からデータを取り出し、itemの各フィールドに入れる
-		err := rows.Scan(&item.ID, &item.Category, &item.Price)
+
+	scanner := bufio.NewScanner(file)
+	// 1行ずつ読み込む
+	for scanner.Scan() {
+		// 1行分を取り出す
+		line := scanner.Text()
+
+		// 1行をスペースで分割する
+		splited := strings.Split(line, " ")
+		// 2つに分割できなかった場合はエラー
+		if len(splited) != 2 {
+			// 「パースに失敗しました」というエラーを生成して返す
+			return errors.New("パースに失敗しました")
+		}
+
+		// 1つめが品目
+		category := splited[0]
+
+		// 2つめが値段
+		// string型をint型に変換する
+		price, err := strconv.Atoi(splited[1])
 		if err != nil {
 			return err
 		}
-		fmt.Printf("[%04d] %s:%d円\n", item.ID, item.Category, item.Price)
-	}
-	fmt.Println("===========")
 
-	if err := rows.Err(); err != nil {
+		fmt.Printf("%s:%d円\n", category, price)
+	}
+
+	// エラーが発生したかどうか調べる
+	if err := scanner.Err(); err != nil {
 		return err
 	}
+
+	fmt.Println("===========")
 
 	return nil
 }

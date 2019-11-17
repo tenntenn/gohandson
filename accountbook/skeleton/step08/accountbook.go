@@ -78,15 +78,8 @@ func (ab *AccountBook) GetItems(limit int) ([]*Item, error) {
 
 // 集計結果を取得する
 func (ab *AccountBook) GetSummaries() ([]*Summary, error) {
-	const sqlStr = `
-	SELECT
-		category,
-		COUNT(1) as count,
-		SUM(price) as sum
-	FROM
-		items
-	GROUP BY
-		category`
+	// TODO:
+	// GROUP BYで品目ごとにグループ化して金額の合計を出す
 	rows, err := ab.db.Query(sqlStr)
 	if err != nil {
 		return nil, err
@@ -123,5 +116,5 @@ func (s *Summary) Avg() float64 {
 	if s.Count == 0 {
 		return 0
 	}
-	return float64(s.Sum) / float64(s.Count)
+	// TODO: 平均を求めて返す（float64にキャストが必要）
 }
