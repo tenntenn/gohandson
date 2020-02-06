@@ -6,6 +6,8 @@ github.com/tenntenn/sqlite v0.0.0-20181202003551-51bf2e1b84b2 h1:gQEyYL/177Pg4mM
 github.com/tenntenn/sqlite v0.0.0-20181202003551-51bf2e1b84b2/go.mod h1:/byHRbL6FFHA5gjdVVgAUPVwCxwU7Agywg7cV/K4zCQ=
 github.com/tenntenn/sqlite v1.0.0 h1:O63wXbT+7iSVImX4YVZz1ftUXkoTsbLp29EtM/47lv4=
 github.com/tenntenn/sqlite v1.0.0/go.mod h1:/byHRbL6FFHA5gjdVVgAUPVwCxwU7Agywg7cV/K4zCQ=
+github.com/tenntenn/sqlite v1.0.2 h1:b7IRA375Ypp80KCkmnhuZdqMI7OFFwjLSU0Q928nc04=
+github.com/tenntenn/sqlite v1.0.2/go.mod h1:7MSQ3P3Gefd3Tcj/NSQsisdVcxfciQ7wGU3a+mdvFcQ=
 golang.org/x/net v0.0.0-20181201002055-351d144fa1fc h1:a3CU5tJYVj92DY2LaA1kUkrsqD5/3mLDhx2NcNqyW+0=
 golang.org/x/net v0.0.0-20181201002055-351d144fa1fc/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
 modernc.org/ccgo v1.0.0 h1:aIU6fp+ic9v4M6l6IAb0LD8byPDmtOhKXRnrNwkp88o=
