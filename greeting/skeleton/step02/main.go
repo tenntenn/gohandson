@@ -27,7 +27,7 @@ func greet() {
 	switch {
 	case h >= 4 && h <= 9:
 		// TODO: おはようと出す
-	case /* 10時00分 〜 16時59分 */:
+	case /* TODO: 10時00分 〜 16時59分 */:
 		fmt.Println("こんにちは")
 	default:
 		fmt.Println("こんばんは")
