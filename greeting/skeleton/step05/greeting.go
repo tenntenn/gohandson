@@ -5,7 +5,6 @@ import (
 	// fmtパッケージのインポート
 	"fmt"
 	"io"
-
 	// timeパッケージのインポート
 	"time"
 
