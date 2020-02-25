@@ -51,7 +51,7 @@ Go1.11からユーザアノテーションという機能が入りました。
 通常は`defer`で呼び出すことで関数の終了時に呼び出します。
 
 ```go
-ctx, task := trace.NewTask(context.Background(), "make coffe")
+ctx, task := trace.NewTask(context.Background(), "make coffee")
 defer task.End()
 ```
 
