@@ -21,7 +21,7 @@ func main() {
 	// 長さ0で容量がnのスライスを作る
 	items := make([]Item, 0, n)
 
-	// iが0からitemsの容量-1の間繰り返す(n回繰り返す）
+	// iが0からitemsの容量未満の間繰り返す(n回繰り返す）
 	// cap(items)はitemsの容量を返す
 	for i := 0; i < cap(items); i++ {
 		items = inputItem(items)
