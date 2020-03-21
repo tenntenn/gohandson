@@ -34,7 +34,7 @@ func (ab *AccountBook) AddItem(item *Item) error {
 	}
 
 	// 「品目 値段」の形式でファイルに出力する
-	if _, err := /* TODO: fmt.Printlnを使って出力 */; err != nil {
+	if _, err := /* TODO: fmt.Fprintlnを使って出力 */; err != nil {
 		return err
 	}
 
