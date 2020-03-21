@@ -4,26 +4,24 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"strings"
 
 	"github.com/nlopes/slack"
 	"github.com/nlopes/slack/slackevents"
-	"google.golang.org/appengine"
-	"google.golang.org/appengine/log"
-	"google.golang.org/appengine/urlfetch"
 )
 
-func init() {
+func main() {
 	http.HandleFunc("/events", eventsHandler)
 	http.HandleFunc("/interaction", interactionHandler)
+	fmt.Println("[INFO] Server listening")
+	http.ListenAndServe(":8080", nil)
 }
 
 func eventsHandler(w http.ResponseWriter, r *http.Request) {
-	ctx := appengine.NewContext(r)
 	token := os.Getenv("SLACK_BOT_TOKEN")
-	slack.SetHTTPClient(urlfetch.Client(ctx))
 	api := slack.New(token)
 
 	defer r.Body.Close()
@@ -35,7 +33,7 @@ func eventsHandler(w http.ResponseWriter, r *http.Request) {
 	opt := slackevents.OptionVerifyToken(&slackevents.TokenComparator{verifytoken})
 	evt, err := slackevents.ParseEvent(json.RawMessage(body), opt)
 	if err != nil {
-		log.Errorf(ctx, "ParseEvent: %v", err)
+		log.Printf("ParseEvent: %v", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -44,7 +42,7 @@ func eventsHandler(w http.ResponseWriter, r *http.Request) {
 		var r *slackevents.ChallengeResponse
 		err := json.Unmarshal([]byte(body), &r)
 		if err != nil {
-			log.Errorf(ctx, "%v", err)
+			log.Printf("%v", err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
@@ -52,14 +50,14 @@ func eventsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Infof(ctx, "Event:%#v", evt)
+	log.Printf("Event:%#v", err)
 	if evt.Type == slackevents.CallbackEvent {
 		switch evt := evt.InnerEvent.Data.(type) {
 		case *slackevents.AppMentionEvent:
 			switch {
 			case strings.Contains(evt.Text, "占い"):
 				if err := selectBloodType(api, evt); err != nil {
-					log.Errorf(ctx, "%v", err)
+					log.Printf("%v", err)
 					http.Error(w, err.Error(), http.StatusInternalServerError)
 					return
 				}

@@ -91,7 +91,7 @@ env_variables:
 Cloud ShellでGAEのアプリケーションをデプロイする。
 
 ```
-$ goapp deploy --application <APP_ID> --version <VERSION> .
+$ gcloud app deploy --project <PROJECT_ID> --version <VERSION_ID>
 ```
 
 ## イベントの設定をする
@@ -101,7 +101,7 @@ $ goapp deploy --application <APP_ID> --version <VERSION> .
 <img src="./img/10_event_subscription_on.png" width="500px">
 
 GAEのURLを貼り付ける。
-例：https://VERSION-dot-slackbot-dot-APP_ID.appspot.com/events
+例：https://VERSION_ID-dot-slackbot-dot-PROJECT_ID.appspot.com/events
 
 <img src="./img/11_event_subscription_url.png" width="500px">
 

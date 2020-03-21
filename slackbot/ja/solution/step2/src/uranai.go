@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"net/url"
@@ -12,9 +13,6 @@ import (
 
 	"github.com/nlopes/slack"
 	"github.com/nlopes/slack/slackevents"
-	"google.golang.org/appengine"
-	"google.golang.org/appengine/log"
-	"google.golang.org/appengine/urlfetch"
 )
 
 func selectBloodType(api *slack.Client, evt *slackevents.AppMentionEvent) error {
@@ -57,9 +55,6 @@ func selectBloodType(api *slack.Client, evt *slackevents.AppMentionEvent) error 
 }
 
 func interactionHandler(w http.ResponseWriter, r *http.Request) {
-	ctx := appengine.NewContext(r)
-	slack.SetHTTPClient(urlfetch.Client(ctx))
-
 	defer r.Body.Close()
 	var buf bytes.Buffer
 	buf.ReadFrom(r.Body)
@@ -69,20 +64,20 @@ func interactionHandler(w http.ResponseWriter, r *http.Request) {
 
 	jsonStr, err := url.QueryUnescape(string(body)[8:])
 	if err != nil {
-		log.Errorf(ctx, "%v", err)
+		log.Printf("%v", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	var message slack.AttachmentActionCallback
 	if err := json.Unmarshal([]byte(jsonStr), &message); err != nil {
-		log.Errorf(ctx, "%v: %s", err, jsonStr)
+		log.Printf("ParseEvent: %v: %s", err, jsonStr)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	if message.Token != verifytoken {
-		log.Errorf(ctx, "%v: %s", err, message.Token)
+		log.Printf("ParseEvent: %v: %s", err, message.Token)
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
@@ -92,18 +87,18 @@ func interactionHandler(w http.ResponseWriter, r *http.Request) {
 	case "select":
 		result := bloodTypeUranai(action.SelectedOptions[0].Value)
 		if err := responseMessage(w, message.OriginalMessage, "★占い結果★", result); err != nil {
-			log.Errorf(ctx, "Error: %v", err)
+			log.Printf("Error: %v", err)
 			w.WriteHeader(http.StatusInternalServerError)
 		}
 	case "cancel":
 		title := fmt.Sprintf(":x: @%s キャンセルされました", message.User.Name)
 		if err := responseMessage(w, message.OriginalMessage, title, ""); err != nil {
-			log.Errorf(ctx, "Error: %v", err)
+			log.Printf("Error: %v", err)
 			w.WriteHeader(http.StatusInternalServerError)
 		}
 		return
 	default:
-		log.Errorf(ctx, "不正なアクション: %s", action)
+		log.Printf("不正なアクション: %s", action)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}

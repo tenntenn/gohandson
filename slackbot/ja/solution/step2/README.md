@@ -14,7 +14,7 @@ env_variables:
 
 ```
 $ cd step2/src
-$ goapp deploy --application <APP_ID> --version <VERSION> .
+$ gcloud app deploy --project <PROJECT_ID> --version <VERSION_ID>
 ```
 
 ## Interactive Componentsの有効化
@@ -28,8 +28,8 @@ $ goapp deploy --application <APP_ID> --version <VERSION> .
 Request URLの部分にデプロイしたアプリケーションのURLを貼り付ける。
 今回増やしたエンドポイントは`interaction`なので、そこにリクエストが来るようにする。
 
-例：https://`VERSION`-dot-slackbot-dot-`APP_ID`.appspot.com/interaction
-※ `VERSION`と`APP_ID`はデプロイ時に指定したもの。
+例：https://`VERSION_ID`-dot-slackbot-dot-`PROJECT_ID`.appspot.com/interaction
+※ `VERSION_ID`と`PROJECT_ID`はデプロイ時に指定したもの。
 
 <img src="./img/02_interactive_component_on.png" width="500px">
 
